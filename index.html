@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>四國語言闖關</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Sans+Thai:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: festive, warm, encouraging — matches the 2026 移民工文化節 poster
+   IDEA: a language passport you carry from country to country and get stamped
+   PICTURE: an open passport with four ink stamps that fill in as you finish
+   COLOUR and TYPE: festival yellow, black ink, brick-red torn labels, cyan/pink starbursts, mascot-matched hue per country
+   LAYOUT: yellow hero with passport, how-to strip, four country tickets; country → topic views with four tabs */
+:root{color-scheme:light dark;
+--bg:light-dark(#fffaf0,#1c150d);--card:light-dark(#ffffff,#2a2015);--ink:light-dark(#2b1d0f,#fff3dc);--soft:light-dark(#6d5a43,#cbb894);
+--line:light-dark(#efe2c8,#463723);--sun:#ffc83d;--sunInk:#141414;--coral:#a8320f;--pink:#e8508a;--cyan:#19c1e0;--ok:#1f9d6b;--bad:#d9412b;
+--id:#2e9e5b;--vi:#109fc0;--th:#2f62d0;--ph:#e0457f}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans TC","Noto Sans Thai",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{line-height:1.12;text-wrap:balance;margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.band{padding:clamp(24px,4vw,56px) max(5vw,16px)}
+.wrap{max-width:1100px;margin:0 auto}
+.fl{font-family:"Fredoka","Noto Sans Thai","Noto Sans TC",sans-serif}
+/* header */
+header{position:sticky;top:0;z-index:20;background:var(--sun);color:var(--sunInk);border-bottom:2px solid var(--sunInk)}
+header .wrap{display:flex;align-items:center;gap:12px;padding:10px max(5vw,16px)}
+.logo{font-weight:900;font-size:18px;background:none;border:0;padding:6px 0;display:flex;align-items:center;gap:8px;color:var(--sunInk)}
+.logo i{width:30px;height:30px;border-radius:50%;background:var(--sunInk);color:var(--sun);display:grid;place-items:center;font-style:normal;font-family:Fredoka;font-size:15px}
+.pill{margin-left:auto;display:flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--sunInk);border-radius:99px;padding:4px 12px 4px 6px;font-weight:700;font-size:14px;color:var(--sunInk)}
+.pill b{display:flex;gap:3px}.pill b span{width:14px;height:14px;border-radius:50%;border:2px dashed #b59b6a}
+.pill b span.on{border:0}
+/* hero */
+.hero{background:var(--sun);color:var(--sunInk)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,4vw,48px);align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,54px);font-weight:900}
+.hero p{font-size:17px;max-width:34em}
+.event{display:inline-flex;flex-wrap:wrap;gap:6px 14px;background:var(--sunInk);color:var(--sun);border-radius:12px;padding:8px 14px;font-size:14px;font-weight:700;margin-bottom:16px}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--coral);color:#fff;border:2px solid var(--sunInk);border-radius:14px;padding:12px 22px;font-weight:900;font-size:18px;box-shadow:4px 4px 0 var(--sunInk);min-height:48px}
+.cta:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--sunInk)}
+/* passport */
+.passport{display:grid;grid-template-columns:1fr 1fr;background:#fffdf6;border:2px solid var(--sunInk);border-radius:18px;box-shadow:8px 8px 0 var(--sunInk);overflow:hidden;color:var(--sunInk)}
+.pp-l{padding:20px;border-right:2px dashed #d8c59c;background:repeating-linear-gradient(0deg,#fffdf6 0 27px,#f3ead4 27px 28px)}
+.pp-l small{display:block;font-size:13px;color:#8a7452;font-weight:700}
+.pp-l h3{font-size:24px;font-weight:900;margin:4px 0 12px}
+.pp-l .hi{font-family:Fredoka,"Noto Sans Thai";font-size:15px;line-height:1.9}
+.pp-l .hi span{display:inline-block;padding:0 8px;border-radius:6px;color:#fff;margin:2px 2px 2px 0}
+.pp-r{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;place-items:center;background:#fffdf6}
+.slot{width:100%;aspect-ratio:1;max-width:120px;border-radius:50%;border:2.5px dashed #d2bd8f;display:grid;place-items:center;font-size:13px;color:#b09a70;font-weight:700;text-align:center;position:relative}
+.slot svg{position:absolute;inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px)}
+.slot.on{border-color:transparent}
+.stamp-in{animation:slam .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes slam{0%{transform:scale(2.2) rotate(-25deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+/* how */
+.how{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.how div{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 16px}
+.how b{display:flex;align-items:center;gap:8px;font-size:17px}
+.how b::before{counter-increment:s;content:counter(s);width:28px;height:28px;flex:none;border-radius:50%;background:var(--sun);color:var(--sunInk);display:grid;place-items:center;font-family:Fredoka}
+.how p{margin:6px 0 0;color:var(--soft);font-size:15px}
+h2.sec{font-size:clamp(26px,3.4vw,34px);font-weight:900;margin-bottom:16px}
+/* countries */
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.ticket{text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:0;overflow:hidden;display:flex;flex-direction:column;box-shadow:4px 4px 0 var(--ink);transition:transform .15s}
+.ticket:hover{transform:translateY(-3px)}
+.ticket .top{background:var(--c);color:#fff;padding:16px 16px 14px}
+.ticket .top .fl{font-size:28px;font-weight:700;line-height:1.1;display:block}
+.ticket .top span{font-weight:700;font-size:14px;opacity:.92}
+.ticket .bot{padding:12px 16px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.ticket h3{font-size:22px;font-weight:900}
+.dots{display:flex;gap:6px}.dots i{flex:1;height:8px;border-radius:9px;background:var(--line)}.dots i.on{background:var(--c)}
+.ticket .st{font-size:14px;color:var(--soft);font-weight:500}
+/* views */
+.view[hidden]{display:none}
+.cband{background:var(--sun);color:var(--sunInk);padding-top:0!important}
+.back{background:rgba(0,0,0,.08);border:0;color:var(--sunInk);border-radius:99px;padding:8px 16px;font-weight:700;min-height:40px;margin-bottom:14px}
+.cband h1{font-size:clamp(32px,5vw,48px);font-weight:900}
+.cband .fl{font-size:clamp(20px,3vw,26px);color:var(--coral);font-weight:700}
+.tip{background:#fff;color:var(--sunInk);border-radius:14px;padding:12px 16px;margin-top:16px;border:2px solid var(--sunInk);font-size:15px;max-width:44em}
+.tip b{color:var(--coral)}
+.topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.topic{display:flex;gap:14px;align-items:center;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;min-height:88px}
+.topic:hover{border-color:var(--c)}
+.topic{align-items:flex-start!important;box-shadow:0 3px 0 var(--line)}
+.topic .ico{width:64px;height:64px;flex:none;border-radius:18px;background:light-dark(#fff3cf,#3a2e17);display:grid;place-items:center;font-size:38px;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;transition:transform .2s}
+.topic:hover .ico{transform:rotate(-8deg) scale(1.06)}
+.topic .tx{display:flex;flex-direction:column;gap:2px}
+.topic .tn{color:var(--c);font-size:14px}
+.topic .pv{color:var(--soft);font-size:15px;font-weight:600}
+.topic small{color:var(--c)!important;font-weight:700}
+.hico{display:inline-grid;place-items:center;width:1.4em;height:1.4em;background:#fff;border:2px solid var(--sunInk);border-radius:.35em;margin-right:.3em;font-size:.8em;vertical-align:.08em;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.topic h3{font-size:19px;font-weight:700}
+.topic small{color:var(--soft);font-size:14px}
+.topic .ok{margin-left:auto;flex:none;font-weight:700;font-size:14px;color:var(--ok);border:2px solid var(--ok);border-radius:99px;padding:2px 10px}
+.need{margin-top:14px;color:var(--soft);font-size:15px}
+/* tabs */
+.tabs{display:flex;gap:6px;position:sticky;top:56px;z-index:10;background:var(--bg);padding:10px 0;overflow-x:auto}
+.tabs button{flex:1 0 auto;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:10px 14px;font-weight:700;min-height:46px;white-space:nowrap}
+.tabs button[aria-selected=true]{background:var(--c);border-color:var(--c);color:#fff}
+.tabs button .chk{color:var(--ok);margin-left:4px}
+.tabs button[aria-selected=true] .chk{color:#fff}
+.panel{padding:8px 0 40px}
+.hint{color:var(--soft);font-size:15px;margin:4px 0 14px}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.w{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;text-align:left;display:flex;flex-direction:column;gap:2px;min-height:96px;position:relative}
+.w:hover,.w.play{border-color:var(--c)}
+.w .fl{font-size:22px;font-weight:600;line-height:1.25;padding-right:26px;overflow-wrap:anywhere}
+.w .pr{font-size:14px;color:var(--c);font-weight:700}
+.w .zh{font-size:15px;color:var(--soft)}
+.w .spk,.s .spk{position:absolute;top:10px;right:10px;width:24px;height:24px;color:var(--c)}
+.sents{display:flex;flex-direction:column;gap:10px}
+.s{background:var(--card);border:2px solid var(--line);border-left:8px solid var(--c);border-radius:14px;padding:14px 50px 14px 16px;text-align:left;position:relative;width:100%}
+.s .fl{font-size:22px;font-weight:600;display:block;line-height:1.35}
+.s .pr{display:block;color:var(--c);font-weight:700;font-size:15px}
+.s .zh{display:block;color:var(--soft)}
+.s .spk{top:50%;margin-top:-12px;right:16px}
+.speed{display:flex;gap:8px;align-items:center;margin-bottom:12px;font-size:14px;color:var(--soft);flex-wrap:wrap}
+.speed button{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:4px 14px;font-weight:700;min-height:36px}
+.speed button[aria-pressed=true]{border-color:var(--c);color:var(--c)}
+/* shadow */
+.sh{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:clamp(18px,4vw,32px);text-align:center;max-width:640px;margin:0 auto}
+.sh .cnt{font-size:14px;color:var(--soft);font-weight:700}
+.sh .fl{font-size:clamp(26px,5vw,36px);font-weight:600;margin:10px 0 4px;line-height:1.3}
+.sh .pr{color:var(--c);font-weight:700}
+.sh .zh{color:var(--soft);margin-bottom:18px}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.big{display:inline-flex;align-items:center;gap:8px;border-radius:99px;padding:12px 22px;font-weight:900;font-size:17px;min-height:52px;border:2px solid var(--c);background:var(--card);color:var(--c)}
+.big.fill{background:var(--c);color:#fff}
+.big.rec{background:var(--coral);border-color:var(--coral);color:#fff;animation:pulse 1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 10px rgba(255,90,54,.18)}}
+.big svg{width:22px;height:22px}
+.res{margin-top:18px;min-height:70px}
+.meter{height:14px;background:var(--line);border-radius:9px;overflow:hidden;max-width:360px;margin:8px auto}
+.meter i{display:block;height:100%;border-radius:9px;transition:width .6s}
+.heard{font-size:15px;color:var(--soft)}
+.score{font:700 30px Fredoka}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.nav button{border:2px solid var(--line);background:none;border-radius:12px;padding:8px 16px;font-weight:700;min-height:44px}
+.pdots{display:flex;gap:6px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.pdots i{width:12px;height:12px;border-radius:50%;background:var(--line)}.pdots i.on{background:var(--ok)}.pdots i.cur{outline:2px solid var(--c);outline-offset:2px}
+.note{font-size:14px;color:var(--soft);background:var(--bg);border-radius:10px;padding:8px 12px;margin-top:12px;text-align:left}
+
+/* shadowing v2 */
+.sh2{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:clamp(14px,3vw,26px)}
+.howto{background:light-dark(#fdf1ee,#3a221a);border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.howto summary{cursor:pointer;font-weight:900;color:var(--coral)}
+.howto ol{margin:8px 0 0;padding-left:20px;font-size:15px}
+.shhead{display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap;margin-bottom:10px}
+.shhead b{font-size:17px}
+.opts2{display:flex;gap:14px;flex-wrap:wrap}
+.opts2 label{display:flex;align-items:center;gap:5px;font-weight:700;cursor:pointer;min-height:36px}
+.opts2 input{width:20px;height:20px;accent-color:var(--c)}
+.sbox{border:2px solid var(--line);border-radius:18px;padding:16px;background:var(--bg)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:clamp(22px,4vw,30px);font-weight:600;background:var(--card);border:0;border-bottom:3px solid var(--sun);border-radius:10px;padding:4px 12px;line-height:1.4}
+button.chip:hover{border-bottom-color:var(--c)}
+.chip.hit{background:light-dark(#e3f5ec,#173a2b);border-bottom-color:var(--ok);color:var(--ok);font-size:20px}
+.chip.miss{background:light-dark(#fdeae6,#3e1d17);border-bottom-color:var(--bad);color:var(--bad);font-size:20px}
+.whole{font-size:clamp(22px,4vw,30px);font-weight:600}
+.spr{margin-top:10px;font-size:18px;color:var(--c);font-weight:600}
+.szh{margin-top:6px;font-weight:700}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.pbtn{border:2px solid var(--coral);background:var(--card);color:var(--coral);border-radius:99px;padding:10px 20px;font-weight:900;font-size:17px;min-height:50px;display:inline-flex;align-items:center;gap:6px}
+.pbtn.fill,.pbtn[aria-pressed=true]{background:var(--coral);color:#fff}
+.pbtn.navy{background:#24356e;border-color:#24356e;color:#fff}.pbtn.navy.rec{background:var(--pink);border-color:var(--pink);animation:pulse 1s infinite}
+.pbtn svg{width:20px;height:20px}
+.seg3{display:inline-flex;border:2px solid var(--coral);border-radius:99px;overflow:hidden}
+.seg3 button{border:0;background:var(--card);color:var(--coral);font-weight:900;font-size:17px;padding:0 18px;min-height:46px}
+.seg3 button[aria-pressed=true]{background:var(--coral);color:#fff}
+.recbox{border:2px dashed var(--line);border-radius:16px;padding:14px}
+.recbox .res{min-height:0;margin-top:10px;text-align:left}
+.recbox .small{font-size:14px;color:var(--soft);margin:10px 0 0}
+.okline{font-weight:900;color:var(--ok);margin-top:8px}
+.heard{margin-bottom:8px}
+/* quiz */
+.q{max-width:640px;margin:0 auto;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:clamp(18px,4vw,30px)}
+.q .cnt{display:flex;justify-content:space-between;font-weight:700;color:var(--soft);font-size:14px}
+.q .ask{font-size:17px;margin:10px 0 4px;font-weight:700}
+.q .stem{font-size:clamp(24px,4.6vw,32px);font-weight:700;margin:6px 0 16px;line-height:1.3}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;border:2px solid var(--line);background:var(--bg);border-radius:14px;padding:12px 16px;font-size:18px;min-height:54px;font-weight:500}
+.opt:hover{border-color:var(--c)}
+.opt.right{border-color:var(--ok);background:light-dark(#e6f6ee,#173a2b)}
+.opt.wrong{border-color:var(--bad);background:light-dark(#fdeae6,#3e1d17)}
+.fb{min-height:28px;margin-top:12px;font-weight:700}
+.end{text-align:center}
+.end .score{font-size:48px}
+/* redeem */
+.ticketbig{max-width:520px;margin:0 auto;background:#fffdf6;color:var(--sunInk);border:3px solid var(--sunInk);border-radius:24px;box-shadow:8px 8px 0 var(--sunInk);padding:24px;text-align:center}
+.ticketbig h2{font-size:32px;font-weight:900}
+.ticketbig .code{font:700 40px Fredoka;letter-spacing:.08em;background:var(--sun);border-radius:14px;padding:6px 0;margin:14px 0}
+.ticketbig .row4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.ticketbig .row4 .slot{max-width:none}
+.hold{position:relative;overflow:hidden;width:100%;border:2px solid var(--sunInk);border-radius:14px;background:#fff;padding:14px;font-weight:900;font-size:17px;min-height:56px;color:var(--sunInk);user-select:none;-webkit-user-select:none;touch-action:none}
+.hold i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--sun);z-index:0}
+.hold span{position:relative}
+.redeemed{border:3px solid var(--ok);color:var(--ok);border-radius:14px;padding:12px;font-weight:900;font-size:20px;transform:rotate(-3deg)}
+.lock{color:#8a7452;font-size:15px}
+/* misc */
+footer{padding:28px max(5vw,16px);color:var(--soft);font-size:14px;text-align:center;border-top:2px solid var(--line)}
+footer button{background:none;border:0;text-decoration:underline;color:var(--soft);font-size:14px;padding:8px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:12px;font-weight:700;z-index:50;max-width:90vw;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;z-index:60;padding:16px}
+.modal[hidden]{display:none}
+.modal div{background:var(--card);border-radius:18px;padding:22px;max-width:380px;text-align:center}
+.modal .btns{margin-top:16px}
+.celebrate{position:fixed;inset:0;display:grid;place-items:center;z-index:55;background:rgba(0,0,0,.4);padding:16px}
+.celebrate[hidden]{display:none}
+.celebrate>div{background:var(--card);border-radius:24px;padding:26px;text-align:center;max-width:360px;width:100%}
+.celebrate .slot{margin:0 auto 14px;max-width:150px}
+
+/* festival poster pieces */
+.tag{display:inline-block;padding:5px 16px 6px;font-weight:900;clip-path:polygon(0 8%,4% 0,30% 6%,58% 0,82% 7%,100% 2%,98% 50%,100% 94%,70% 100%,44% 93%,16% 100%,2% 95%,0 55%)}
+.tag.red{background:var(--coral);color:#fff}.tag.white{background:#fff;color:var(--sunInk)}.tag.pink{background:var(--pink);color:#fff}
+.burst{position:absolute;pointer-events:none;z-index:0}
+.hero{position:relative;overflow:hidden}.hero .wrap{position:relative;z-index:1}
+.awn{display:flex;margin-inline:calc(-1*max(5vw,16px))!important;height:clamp(44px,7vw,70px);margin:0 0 6px;filter:drop-shadow(0 3px 0 rgba(0,0,0,.12))}
+.awn i{flex:1;border-radius:0 0 50% 50%/0 0 34% 34%;display:grid;place-items:center;font-style:normal;font-size:clamp(14px,2.4vw,22px);color:#ffc83d}
+.info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.info div{background:#fff;color:var(--sunInk);border-radius:16px;padding:14px 16px;border:2px solid var(--sunInk)}
+.info b{display:block;font-size:14px;color:var(--coral)}.info span{font-weight:700}
+.info a{color:var(--sunInk);font-weight:900}
+.festband{background:var(--sun);color:var(--sunInk)}
+@media(max-width:700px){.info{grid-template-columns:1fr}}
+@media(max-width:420px){.info{grid-template-columns:1fr}}
+@media(max-width:860px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.how{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.hero .wrap{grid-template-columns:1fr}.topics{grid-template-columns:1fr}}
+@media(max-width:420px){.passport{grid-template-columns:1fr}.pp-l{border-right:0;border-bottom:2px dashed #d8c59c}.how{grid-template-columns:1fr}.ticket .top .fl{font-size:24px}.pill .t{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <button class="logo" id="logo" aria-label="回首頁"><i>4</i>四國語言闖關</button>
+  <div class="pill" id="pill" aria-live="polite"><b id="pillDots"></b><span class="t" id="pillTxt">0 / 4 章</span></div>
+</div></header>
+
+<main>
+<section class="view" id="vHome">
+  <div class="band hero"><svg class="burst" style="left:-30px;bottom:-30px;width:140px;height:140px;transform:rotate(8deg)" viewBox="-50 -50 100 100" aria-hidden="true"><polygon fill="#19c1e0" points="50.0,0.0 29.0,7.8 43.3,25.0 21.2,21.2 25.0,43.3 7.8,29.0 0.0,50.0 -7.8,29.0 -25.0,43.3 -21.2,21.2 -43.3,25.0 -29.0,7.8 -50.0,0.0 -29.0,-7.8 -43.3,-25.0 -21.2,-21.2 -25.0,-43.3 -7.8,-29.0 -0.0,-50.0 7.8,-29.0 25.0,-43.3 21.2,-21.2 43.3,-25.0 29.0,-7.8"/></svg><svg class="burst" style="right:4%;top:14px;width:70px;height:70px;transform:rotate(-10deg)" viewBox="-50 -50 100 100" aria-hidden="true"><polygon fill="#fff" points="50.0,0.0 29.0,7.8 43.3,25.0 21.2,21.2 25.0,43.3 7.8,29.0 0.0,50.0 -7.8,29.0 -25.0,43.3 -21.2,21.2 -43.3,25.0 -29.0,7.8 -50.0,0.0 -29.0,-7.8 -43.3,-25.0 -21.2,-21.2 -25.0,-43.3 -7.8,-29.0 -0.0,-50.0 7.8,-29.0 25.0,-43.3 21.2,-21.2 43.3,-25.0 29.0,-7.8"/></svg><svg class="burst" style="right:-24px;bottom:20%;width:110px;height:110px;transform:rotate(20deg)" viewBox="-50 -50 100 100" aria-hidden="true"><polygon fill="#e8508a" points="50.0,0.0 29.0,7.8 43.3,25.0 21.2,21.2 25.0,43.3 7.8,29.0 0.0,50.0 -7.8,29.0 -25.0,43.3 -21.2,21.2 -43.3,25.0 -29.0,7.8 -50.0,0.0 -29.0,-7.8 -43.3,-25.0 -21.2,-21.2 -25.0,-43.3 -7.8,-29.0 -0.0,-50.0 7.8,-29.0 25.0,-43.3 21.2,-21.2 43.3,-25.0 29.0,-7.8"/></svg><div class="wrap">
+    <div>
+      <div class="event"><span>2026 移民工文化節</span><span>12/12（六）10:00–20:00</span><span>三創生活園區</span></div>
+      <h1>開口說四國語，<br>集章換小禮物！</h1>
+      <p>印尼語、越南語、泰語、菲律賓語，每國 4 個生活主題：打招呼、自我介紹、數字與價錢、買飲料與食物。聽一聽、跟著唸、答對小挑戰，就能在你的語言護照蓋上一枚章。</p>
+      <button class="cta" id="go">開始闖關 →</button>
+    </div>
+    <div class="passport" aria-label="我的語言護照">
+      <div class="pp-l">
+        <small>LANGUAGE PASSPORT</small>
+        <h3>我的語言護照</h3>
+        <div class="hi" id="hiList"></div>
+      </div>
+      <div class="pp-r" id="ppSlots"></div>
+    </div>
+  </div></div>
+
+  <div class="band"><div class="wrap">
+    <h2 class="sec"><span class="tag pink">怎麼玩？簡單 4 步驟！</span></h2>
+    <div class="how">
+      <div><b>選一個國家</b><p>從下方四張車票挑一個你想認識的語言。</p></div>
+      <div><b>學生詞與句型</b><p>點卡片就會念給你聽，可以切換慢速。</p></div>
+      <div><b>跟讀＋練習</b><p>按麥克風跟著唸，AI 幫你打分數；再完成 5 題小挑戰。</p></div>
+      <div><b>集滿 4 章兌換</b><p>每國完成 <span id="needTxt">1</span> 個主題就蓋章，集滿四國到服務台換禮物。</p></div>
+    </div>
+  </div></div>
+
+  <div class="band" id="countries" style="padding-top:0"><div class="wrap">
+    <h2 class="sec"><span class="tag red">選擇你的目的地</span></h2>
+    <div class="grid4" id="cGrid"></div>
+    <div style="margin-top:22px" id="redeemBox"></div>
+  </div></div>
+
+  <div class="band festband"><div class="wrap">
+    <h2 class="sec"><span class="tag red">移民工文化節 第 2 屆</span></h2>
+    <div class="info">
+      <div><b>時間</b><span>2026/12/12（六）<br>10:00–20:00</span></div>
+      <div><b>地點</b><span>三創生活園區<br>1 樓中心廣場 ＆ 5 樓星光廳</span></div>
+      <div><b>主辦</b><span>One-Forty ×<br>全家便利商店</span></div>
+    </div>
+    <p style="margin:14px 0 0;font-weight:700">帶著今天學會的一句話，到東南亞美食市集跟攤主打聲招呼吧！</p>
+  </div></div>
+</section>
+
+<section class="view" id="vCountry" hidden></section>
+<section class="view" id="vTopic" hidden></section>
+<section class="view" id="vRedeem" hidden></section>
+</main>
+
+<footer>
+  四國語言闖關 Demo ・ 內容編輯：心雅老師（泰語）・ 語音播放與辨識使用瀏覽器內建功能<br>
+  <button id="resetBtn">重設我的進度（展示用）</button>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="modal" id="modal" hidden><div><p id="mTxt"></p><div class="btns"><button class="big" id="mNo">取消</button><button class="big fill" id="mYes" style="--c:var(--coral)">確定</button></div></div></div>
+<div class="celebrate" id="cele" hidden><div id="celeBody"></div></div>
+
+<script>
+{
+/* ===== 活動設定（可自行修改） ===== */
+const CONFIG={
+  TOPICS_NEEDED:1,   // 每國完成幾個主題可蓋章（1～4）
+  QUIZ_LEN:5,        // 每次練習題數
+  PASS:4,            // 答對幾題算過關
+  SHADOW_PASS:60     // 跟讀幾分算唸對
+};
+
+/* ===== 教材：[外語, 拼讀, 中文] ===== */
+const AWN={id:[['#c8102e',''],['#fff','']],vi:[['#da251d','★'],['#fff','']],th:[['#a51931',''],['#fff',''],['#2d2a6e',''],['#fff','']],ph:[['#fff','✹'],['#ce1126',''],['#0038a8','']]};
+const ICONS={id:['👋','🙋','💰','🍛'],vi:['👋','🙋','💰','🍜'],th:['🙏','🙋','💰','🥭'],ph:['👋','🙋','💰','🍧']};
+const awning=c=>{const a=AWN[c];return '<div class="awn" aria-hidden="true">'+Array.from({length:12},(_,i)=>{const [bg,g]=a[i%a.length];return `<i style="background:${bg}">${g}</i>`}).join('')+'</div>'};
+const LANGS=[
+{id:'id',name:'印尼語',country:'印尼',code:'ID',lang:'id-ID',hi:'Halo',color:'var(--id)',
+ topics:[
+ {t:'打招呼問候語',tip:'稱呼長輩或陌生人時，男性叫 <b>Bapak（Pak）</b>、女性叫 <b>Ibu（Bu）</b>，表示尊敬。',
+  words:[['Halo','ha-lo','你好／哈囉'],['Selamat pagi','se-la-mat pa-gi','早安'],['Selamat siang','se-la-mat si-ang','午安'],['Selamat malam','se-la-mat ma-lam','晚上好'],['Apa kabar?','a-pa ka-bar','你好嗎？'],['Baik','ba-ik','好'],['Terima kasih','te-ri-ma ka-sih','謝謝'],['Sama-sama','sa-ma sa-ma','不客氣'],['Sampai jumpa','sam-pai jum-pa','再見']],
+  sents:[['Halo, apa kabar?','ha-lo, a-pa ka-bar','哈囉，你好嗎？'],['Kabar baik,|terima kasih.','ka-bar ba-ik, te-ri-ma ka-sih','我很好，謝謝。'],['Selamat pagi,|Pak!','se-la-mat pa-gi, pak','先生，早安！'],['Sampai jumpa|lagi!','sam-pai jum-pa la-gi','下次見！']]},
+ {t:'自我介紹',tip:'印尼有 700 多種地方語言，<b>印尼語（Bahasa Indonesia）</b>是大家共通的國語。',
+  words:[['saya','sa-ya','我'],['kamu','ka-mu','你'],['Anda','an-da','您'],['nama','na-ma','名字'],['orang','o-rang','人'],['dari','da-ri','來自'],['Taiwan','tai-wan','台灣'],['Indonesia','in-do-ne-si-a','印尼'],['siapa','si-a-pa','誰']],
+  sents:[['Nama saya Mary.','na-ma sa-ya Mary','我的名字是瑪麗。'],['Saya orang Taiwan.','sa-ya o-rang tai-wan','我是台灣人。'],['Siapa nama Anda?','si-a-pa na-ma an-da','您叫什麼名字？'],['Senang berkenalan dengan Anda.','se-nang ber-ke-na-lan de-ngan an-da','很高興認識您。']]},
+ {t:'數字與價錢',tip:'印尼盾（rupiah）面額很大，常聽到 <b>ribu（千）</b>，價錢寫成 15.000，用點分隔。',
+  words:[['satu','sa-tu','一'],['dua','du-a','二'],['tiga','ti-ga','三'],['empat','em-pat','四'],['lima','li-ma','五'],['enam','e-nam','六'],['tujuh','tu-juh','七'],['delapan','de-la-pan','八'],['sembilan','sem-bi-lan','九'],['sepuluh','se-pu-luh','十'],['seratus','se-ra-tus','一百'],['ribu','ri-bu','千'],['berapa','be-ra-pa','多少'],['ini','i-ni','這個'],['semuanya','se-mu-a-nya','全部']],
+  sents:[['Ini berapa?','i-ni be-ra-pa','這個多少錢？'],['Harganya|sepuluh ribu|rupiah.','har-ga-nya se-pu-luh ri-bu ru-pi-ah','價錢是一萬印尼盾。'],['Semuanya berapa?','se-mu-a-nya be-ra-pa','全部多少錢？'],['Semuanya|lima puluh ribu.','se-mu-a-nya li-ma pu-luh ri-bu','全部五萬。']]},
+ {t:'買飲料與食物',tip:'<b>薑黃飯塔（Nasi Tumpeng）</b>堆成小山形，常出現在慶典，表達感恩與祝福。用手吃飯時要用<b>右手</b>，左手被視為不潔喔！點 es teh（冰茶）通常預設是甜的，想要無糖說 tawar。',
+  words:[['nasi tumpeng','na-si tum-peng','薑黃飯塔'],['rendang sapi','ren-dang sa-pi','仁當牛肉'],['nasi goreng','na-si go-reng','炒飯'],['es teh manis','es teh ma-nis','冰甜茶'],['kopi','ko-pi','咖啡'],['mau','ma-u','要'],['satu porsi','sa-tu por-si','一份'],['satu gelas','sa-tu ge-las','一杯'],['pedas','pe-das','辣'],['tidak pedas','ti-dak pe-das','不辣'],['kurang manis','ku-rang ma-nis','少甜'],['tawar','ta-war','無糖（原味）'],['tanpa es','tan-pa es','去冰']],
+  sents:[['Saya|mau|rendang sapi|satu porsi.','sa-ya ma-u ren-dang sa-pi sa-tu por-si','我要一份仁當牛肉。'],['Saya|mau|es teh manis|satu gelas.','sa-ya ma-u es teh ma-nis sa-tu ge-las','我要一杯冰甜茶。'],['Tidak pedas,|ya.','ti-dak pe-das, ya','不要辣喔。'],['Kurang manis,|tanpa es.','ku-rang ma-nis, tan-pa es','少甜，去冰。']]}
+ ]},
+{id:'vi',name:'越南語',country:'越南',code:'VN',lang:'vi-VN',hi:'Xin chào',color:'var(--vi)',
+ topics:[
+ {t:'打招呼問候語',tip:'越南人依年齡稱呼對方：比你大的男生叫 <b>anh（哥）</b>、女生叫 <b>chị（姊）</b>，比你小叫 <b>em</b>。',
+  words:[['Xin chào','sin chao','你好'],['Chào anh','chao anh','你好（對哥哥／男性）'],['Chào chị','chao chi','你好（對姊姊／女性）'],['Bạn khỏe không?','ban khoe khong','你好嗎？'],['Tôi khỏe','toi khoe','我很好'],['Cảm ơn','cam on','謝謝'],['Không có gì','khong co gi','不客氣'],['Xin lỗi','sin loi','對不起'],['Tạm biệt','tam biet','再見']],
+  sents:[['Xin chào!|Bạn|khỏe không?','sin chao, ban khoe khong','你好！你好嗎？'],['Tôi|khỏe,|cảm ơn.','toi khoe, cam on','我很好，謝謝。'],['Chào chị!','chao chi','姊姊好！'],['Tạm biệt,|hẹn gặp lại!','tam biet, hen gap lai','再見，下次見！']]},
+ {t:'自我介紹',tip:'越南語用拉丁字母書寫，字上的符號代表<b>聲調</b>，北部口音有 6 個聲調。',
+  words:[['tôi','toi','我'],['bạn','ban','你'],['tên','ten','名字'],['là','la','是'],['người','nguoi','人'],['Đài Loan','dai loan','台灣'],['Việt Nam','viet nam','越南'],['gì','gi','什麼']],
+  sents:[['Tôi|tên là|Mary.','toi ten la Mary','我叫瑪麗。'],['Tôi|là|người|Đài Loan.','toi la nguoi dai loan','我是台灣人。'],['Bạn|tên là|gì?','ban ten la gi','你叫什麼名字？'],['Rất vui được gặp bạn.','rat vui duoc gap ban','很高興認識你。']]},
+ {t:'數字與價錢',tip:'越南盾（đồng）面額大，常說 <b>nghìn（千）</b>，南部人說 <b>ngàn</b>。',
+  words:[['một','mot','一'],['hai','hai','二'],['ba','ba','三'],['bốn','bon','四'],['năm','nam','五'],['sáu','sau','六'],['bảy','bay','七'],['tám','tam','八'],['chín','chin','九'],['mười','muoi','十'],['trăm','tram','百'],['nghìn','nghin','千'],['bao nhiêu tiền','bao nhieu tien','多少錢'],['cái này','cai nay','這個'],['tất cả','tat ca','全部']],
+  sents:[['Cái này|bao nhiêu tiền?','cai nay bao nhieu tien','這個多少錢？'],['Cái này|năm mươi nghìn|đồng.','cai nay nam muoi nghin dong','這個五萬越南盾。'],['Tất cả|bao nhiêu tiền?','tat ca bao nhieu tien','全部多少錢？'],['Tất cả|một trăm nghìn|đồng.','tat ca mot tram nghin dong','全部十萬越南盾。']]},
+ {t:'買飲料與食物',tip:'在越南（尤其是河內），<b>河粉</b>是常見的早餐！<b>生春捲</b>用米紙包鮮蝦和生菜，不油炸、很清爽。「杯」南部說 ly、北部說 cốc。',
+  words:[['phở bò','pho bo','牛肉河粉'],['gỏi cuốn','goi cuon','越南生春捲'],['bánh mì','banh mi','越式法國麵包'],['cà phê sữa đá','ca phe sua da','煉乳冰咖啡'],['trà đá','tra da','冰茶'],['cho tôi','cho toi','給我'],['một tô','mot to','一碗'],['một ly','mot ly','一杯'],['ít đường','it duong','少糖'],['không đường','khong duong','無糖'],['không đá','khong da','去冰'],['cay','cay','辣'],['không cay','khong cay','不辣']],
+  sents:[['Cho tôi|một tô|phở bò.','cho toi mot to pho bo','給我一碗牛肉河粉。'],['Cho tôi|một ly|cà phê sữa đá.','cho toi mot ly ca phe sua da','給我一杯煉乳冰咖啡。'],['Ít đường,|không đá|nhé.','it duong, khong da nhe','少糖，去冰喔。'],['Không cay|nhé.','khong cay nhe','不要辣喔。']]}
+ ]},
+{id:'th',name:'泰語',country:'泰國',code:'TH',lang:'th-TH',hi:'สวัสดี',color:'var(--th)',
+ topics:[
+ {t:'打招呼問候語',tip:'泰語的<b>語尾助詞</b>分男女：女生說 ค่ะ（kha）、男生說 ครับ（khrab），加在句尾表示禮貌。',
+  words:[['สวัสดี','Sa-wat-di','你好'],['ค่ะ','Kha','語尾助詞（女生）'],['ครับ','Khrab','語尾助詞（男生）'],['ขอบคุณ','Khop-khun','謝謝'],['สบายดีไหม','Sa-bai-di-mai','你好嗎？'],['ไม่เป็นไร','Mai-pen-rai','沒關係／不客氣']],
+  sents:[['สวัสดี|ค่ะ','Sa-wat-di kha','你好（女生說的）'],['สวัสดี|ครับ','Sa-wat-di khrab','你好（男生說的）'],['ขอบคุณ|ค่ะ','Khop-khun kha','謝謝（女生說的）'],['ขอบคุณ|ครับ','Khop-khun khrab','謝謝（男生說的）']]},
+ {t:'自我介紹',tip:'泰語的「我」也分男女：男生用 <b>ผม（Phom）</b>、女生用 <b>ฉัน（Chan）</b>。',
+  words:[['ผม','Phom','我（男生）'],['ฉัน','Chan','我（女生）'],['คุณ','Khun','你／先生／小姐'],['เธอ','Thoe','你／妳'],['เป็น','Pen','是'],['คน','Khon','人'],['ชื่อ','Chue','叫／名字'],['ไต้หวัน','Tai-wan','台灣'],['ไทย','Thai','泰國']],
+  sents:[['ฉัน|ชื่อ|มารี','Chan chue Maree','我叫瑪麗。'],['ฉัน|เป็น|คน|ไต้หวัน','Chan pen khon Taiwan','我是台灣人。'],['ยินดี|ที่|ได้|รู้จัก','Yin-dee tee dai ru-chak','很高興認識你。']]},
+ {t:'數字與價錢',tip:'泰國的錢叫<b>泰銖 บาท（baht）</b>；問價錢時句尾記得加 คะ／ครับ 更有禮貌。',
+  words:[['หนึ่ง','nueng','一'],['สอง','song','二'],['สาม','sam','三'],['สี่','see','四'],['ห้า','ha','五'],['หก','hok','六'],['เจ็ด','jet','七'],['แปด','paet','八'],['เก้า','kao','九'],['สิบ','sip','十'],['ร้อย','roi','百'],['สามร้อย','sam-roi','三百'],['บาท','baht','泰銖'],['อันนี้','An-nee','這個'],['ทั้งหมด','Thang-mod','一共'],['เท่าไหร่','thao-rai','多少錢']],
+  sents:[['อันนี้|เท่าไหร่|คะ','An-nee thao-rai kha?','這個多少錢？'],['อันนี้|ห้าสิบ|บาท|ค่ะ','An-nee ha-sip baht kha','這個 50 泰銖。'],['ทั้งหมด|เท่าไหร่|คะ','Thang-mod thao-rai kha?','一共多少錢？'],['ทั้งหมด|สามร้อย|บาท|ค่ะ','Thang-mod sam-roi baht kha','一共 300 泰銖。']]},
+ {t:'買飲料與食物',tip:'<b>芒果糯米飯</b>淋上椰奶是泰國國民甜點；你知道嗎？<b>月亮蝦餅</b>其實是「台式泰菜」，不是泰國本土料理喔！點泰奶也能選甜度和冰塊，跟台灣手搖飲一樣。',
+  words:[['ข้าวเหนียวมะม่วง','khao-niao-ma-muang','芒果糯米'],['ต้มยำกุ้ง','tom-yam-kung','酸辣蝦湯（冬蔭功）'],['ชาไทย','cha-thai','泰奶'],['ไม่หวาน','mai-wan','無糖'],['หวานน้อย','wan-noi','微糖'],['หวานปกติ','wan-pok-ka-ti','正常甜（全糖）'],['ไม่ใส่น้ำแข็ง','mai-sai-nam-khaeng','不加冰'],['น้ำแข็งน้อย','nam-khaeng-noi','微冰'],['น้ำแข็งปกติ','nam-khaeng-pok-ka-ti','正常冰'],['แก้ว','kaeo','杯（量詞）'],['เอา','ao','要'],['ไม่เอา','mai-ao','不要'],['เผ็ดมาก','phet-mak','大辣'],['เผ็ดกลาง','phet-klang','中辣'],['เผ็ดน้อย','phet-noi','小辣']],
+  sents:[['ฉัน|เอา|ข้าวเหนียวมะม่วง|หนึ่ง|ที่|ค่ะ','Chan ao khao-niao-ma-muang nueng thi kha','我要一個芒果糯米。'],['ฉัน|เอา|ต้มยำกุ้ง|หนึ่ง|ที่|เผ็ดน้อย|นะคะ','Chan ao tom-yam-kung nueng thi, phet-noi na kha','我要一個酸辣蝦湯，小辣。'],['ฉัน|เอา|ชาไทย|แก้ว|นึง|ค่ะ','Chan ao cha-thai kaeo nueng kha','我要一杯泰奶。'],['หวานน้อย|ไม่ใส่น้ำแข็ง','Wan-noi, mai-sai-nam-khaeng','微糖，不加冰。']]}
+ ]},
+{id:'ph',name:'菲律賓語',country:'菲律賓',code:'PH',lang:'fil-PH',hi:'Kumusta',color:'var(--ph)',
+ topics:[
+ {t:'打招呼問候語',tip:'對長輩或客人在句尾加 <b>po</b> 表示禮貌，例如 Salamat po（謝謝您），跟泰語的 ค่ะ／ครับ 很像！',
+  words:[['Kumusta?','ku-mus-ta','你好（嗎）？'],['Magandang umaga','ma-gan-dang u-ma-ga','早安'],['Magandang hapon','ma-gan-dang ha-pon','午安'],['Magandang gabi','ma-gan-dang ga-bi','晚上好'],['Mabuti','ma-bu-ti','很好'],['Salamat','sa-la-mat','謝謝'],['Walang anuman','wa-lang a-nu-man','不客氣'],['Paalam','pa-a-lam','再見'],['po','po','禮貌語尾詞']],
+  sents:[['Kumusta ka?','ku-mus-ta ka','你好嗎？'],['Mabuti naman,|salamat.','ma-bu-ti na-man, sa-la-mat','我很好，謝謝。'],['Magandang umaga|po!','ma-gan-dang u-ma-ga po','早安（禮貌）！'],['Salamat po!','sa-la-mat po','謝謝您！']]},
+ {t:'自我介紹',tip:'菲律賓語（Filipino）以他加祿語為基礎，日常也常夾雜<b>英文</b>，叫做 Taglish。',
+  words:[['ako','a-ko','我'],['ikaw','i-kaw','你'],['pangalan','pa-nga-lan','名字'],['ko','ko','我的'],['mo','mo','你的'],['taga-','ta-ga','來自…的'],['Taiwan','tai-wan','台灣'],['Pilipinas','pi-li-pi-nas','菲律賓'],['ano','a-no','什麼']],
+  sents:[['Ako si Mary.','a-ko si Mary','我是瑪麗。'],['Taga-Taiwan ako.','ta-ga tai-wan a-ko','我來自台灣。'],['Ano ang pangalan mo?','a-no ang pa-nga-lan mo','你叫什麼名字？'],['Ikinagagalak kitang makilala.','i-ki-na-ga-ga-lak ki-tang ma-ki-la-la','很高興認識你。']]},
+ {t:'數字與價錢',tip:'菲律賓人講價錢時，常常改用<b>西班牙語數字或英文數字</b>，例如 singkwenta（50）。',
+  words:[['isa','i-sa','一'],['dalawa','da-la-wa','二'],['tatlo','tat-lo','三'],['apat','a-pat','四'],['lima','li-ma','五'],['anim','a-nim','六'],['pito','pi-to','七'],['walo','wa-lo','八'],['siyam','si-yam','九'],['sampu','sam-pu','十'],['isang daan','i-sang da-an','一百'],['piso','pi-so','披索'],['magkano','mag-ka-no','多少錢'],['ito','i-to','這個'],['lahat','la-hat','全部']],
+  sents:[['Magkano ito?','mag-ka-no i-to','這個多少錢？'],['Isang daang|piso.','i-sang da-ang pi-so','一百披索。'],['Magkano lahat?','mag-ka-no la-hat','全部多少錢？'],['Tatlong daang|piso|lahat.','tat-long da-ang pi-so la-hat','全部三百披索。']]},
+ {t:'買飲料與食物',tip:'<b>Halo-halo</b> 是「混在一起」的意思，配料豐富的綜合刨冰。菲律賓人幾乎每餐都配<b>白飯（kanin）</b>，炸雞、甚至義大利麵都可能配飯！',
+  words:[['halo-halo','ha-lo ha-lo','綜合刨冰'],['sisig','si-sig','鐵板豬肉'],['kanin','ka-nin','白飯'],['adobo','a-do-bo','醬醋燉肉'],['kape','ka-pe','咖啡'],['gusto ko','gus-to ko','我想要'],['isa','i-sa','一（個／份）'],['maanghang','ma-ang-hang','辣'],['hindi maanghang','hin-di ma-ang-hang','不辣'],['walang asukal','wa-lang a-su-kal','無糖'],['konting asukal','kon-ting a-su-kal','少糖'],['walang yelo','wa-lang ye-lo','去冰'],['masarap','ma-sa-rap','好吃']],
+  sents:[['Gusto ko|ng|isang|halo-halo.','gus-to ko nang i-sang ha-lo ha-lo','我想要一份綜合刨冰。'],['Isang kape|po,|walang asukal.','i-sang ka-pe po, wa-lang a-su-kal','一杯咖啡，無糖。'],['Isang sisig at kanin po.','i-sang si-sig at ka-nin po','一份鐵板豬肉和白飯，謝謝。'],['Masarap!','ma-sa-rap','好好吃！']]}
+ ]}
+];
+
+/* 斷句：句子以 | 分段（沒有 | 的拉丁語句子以空白分段） */
+for(const l of LANGS)for(const T of l.topics)T.sents=T.sents.map(x=>{const raw=x[0];const ch=raw.includes('|')?raw.split('|').map(t=>t.trim()):raw.split(/\s+/);return [l.id==='th'?ch.join(''):ch.join(' '),x[1],x[2],ch]});
+
+/* ===== state ===== */
+const KEY='sea4-progress-v1';
+let S={done:{},shadow:{},finishedAt:null,redeemedAt:null,code:null};
+try{const j=JSON.parse(localStorage.getItem(KEY));if(j&&j.done)S=Object.assign(S,j)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s);
+const L=id=>LANGS.find(l=>l.id===id);
+const topicsDone=c=>[0,1,2,3].filter(i=>S.done[c+'-'+(i+1)]).length;
+const stamped=c=>topicsDone(c)>=CONFIG.TOPICS_NEEDED;
+const stampCount=()=>LANGS.filter(l=>stamped(l.id)).length;
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+const ICON={spk:'<svg class="spk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',
+mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
+play:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>'};
+
+function stampSVG(l,fresh){
+  const r=Math.random()*16-8;
+  return `<svg viewBox="0 0 120 120" class="${fresh?'stamp-in':''}" style="color:${l.color}" aria-hidden="true"><g transform="rotate(${r.toFixed(1)} 60 60)" fill="none" stroke="currentColor">
+  <circle cx="60" cy="60" r="54" stroke-width="5"/><circle cx="60" cy="60" r="44" stroke-width="1.6" stroke-dasharray="3 3"/>
+  <path id="arc${l.id}" d="M24 60a36 36 0 0 1 72 0" stroke="none"/>
+  <text font-family="Fredoka,Noto Sans TC" font-weight="700" font-size="11" fill="currentColor" stroke="none" letter-spacing="2"><textPath href="#arc${l.id}" startOffset="50%" text-anchor="middle">${l.code} · PASSED</textPath></text>
+  <text x="60" y="70" text-anchor="middle" font-family="Noto Sans TC" font-weight="900" font-size="24" fill="currentColor" stroke="none">${l.country}</text>
+  <text x="60" y="90" text-anchor="middle" font-family="Fredoka,Noto Sans Thai" font-weight="600" font-size="12" fill="currentColor" stroke="none">${esc(l.hi)}</text></g></svg>`;
+}
+const slotHTML=(l,fresh)=>stamped(l.id)?`<div class="slot on" aria-label="${l.country}已蓋章">${stampSVG(l,fresh)}</div>`:`<div class="slot" aria-label="${l.country}尚未蓋章">${l.country}<br>待蓋章</div>`;
+
+/* ===== speech ===== */
+let rate=1,voices=[];
+const loadV=()=>{try{voices=speechSynthesis.getVoices()}catch(e){}};
+if('speechSynthesis' in window){loadV();speechSynthesis.onvoiceschanged=loadV}
+const VPREF={id:['id','in'],vi:['vi'],th:['th'],ph:['fil','tl','id']};
+const warned={};
+function pickVoice(c){
+  for(const p of VPREF[c]){const v=voices.find(v=>v.lang.toLowerCase().replace('_','-').startsWith(p));if(v)return v}
+  return null;
+}
+function speak(text,c,el){
+  if(!('speechSynthesis' in window)){toast('這個瀏覽器不支援語音播放');return}
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text.replace(/-$/,''));
+    u.lang=L(c).lang;const v=pickVoice(c);if(v){u.voice=v;u.lang=v.lang}
+    else if(!warned[c]&&voices.length){warned[c]=1;toast(`這台裝置沒有${L(c).name}語音，發音可能不標準`)}
+    u.rate=rate*(c==='th'?0.9:1);
+    if(el){el.classList.add('play');u.onend=u.onerror=()=>el.classList.remove('play')}
+    speechSynthesis.speak(u);
+  }catch(e){toast('無法播放語音')}
+}
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let micBlocked=!SR;
+const norm=(s,c)=>{s=s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/[^\p{L}\p{N}\p{M}]+/gu,' ').trim();return c==='th'?s.replace(/\s+/g,''):s};
+function sim(a,b){
+  if(!a||!b)return 0;const m=a.length,n=b.length;let p=[...Array(n+1).keys()];
+  for(let i=1;i<=m;i++){const q=[i];for(let j=1;j<=n;j++)q[j]=Math.min(p[j]+1,q[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=q}
+  return Math.max(0,Math.round((1-p[n]/Math.max(m,n))*100));
+}
+
+/* ===== ui helpers ===== */
+let tT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('on'),2600)}
+function ask(msg,yes){$('#mTxt').textContent=msg;$('#modal').hidden=false;$('#mYes').onclick=()=>{$('#modal').hidden=true;yes()};$('#mNo').onclick=()=>$('#modal').hidden=true}
+function show(id){for(const v of document.querySelectorAll('.view'))v.hidden=v.id!==id;window.scrollTo(0,0)}
+function pill(){
+  $('#pillDots').innerHTML=LANGS.map(l=>`<span class="${stamped(l.id)?'on':''}" style="${stamped(l.id)?'background:'+l.color:''}"></span>`).join('');
+  $('#pillTxt').textContent=stampCount()+' / 4 章';
+}
+
+/* ===== home ===== */
+function renderHome(){
+  $('#needTxt').textContent=CONFIG.TOPICS_NEEDED;
+  $('#hiList').innerHTML=LANGS.map(l=>`<div><span style="background:${l.color}">${l.code}</span>${esc(l.hi)}</div>`).join('');
+  $('#ppSlots').innerHTML=LANGS.map(l=>slotHTML(l)).join('');
+  $('#cGrid').innerHTML=LANGS.map(l=>{const d=topicsDone(l.id);return `<button class="ticket" style="--c:${l.color}" data-go="${l.id}">
+    <div class="top"><span class="fl">${esc(l.hi)}</span><span>${l.code} · ${l.country}</span></div>
+    <div class="bot"><h3>${l.name}</h3><div class="dots">${[0,1,2,3].map(i=>`<i class="${S.done[l.id+'-'+(i+1)]?'on':''}"></i>`).join('')}</div>
+    <span class="st">${stamped(l.id)?'已蓋章 ✓ ・ ':''}完成 ${d} / 4 個主題</span></div></button>`}).join('');
+  const n=stampCount();
+  $('#redeemBox').innerHTML=n>=4?`<button class="cta" data-go="redeem" style="width:100%;justify-content:center">集滿 4 章了！打開兌換券 →</button>`
+   :`<p class="need">還差 <b>${4-n}</b> 個國家的章就可以兌換小禮物。</p>`;
+  pill();show('vHome');
+}
+
+/* ===== country ===== */
+function renderCountry(c){
+  const l=L(c);
+  $('#vCountry').innerHTML=`<div class="band cband" style="--c:${l.color}">${awning(c)}<div class="wrap">
+    <button class="back" data-go="">← 所有國家</button>
+    <h1>${l.country}篇・${l.name}</h1><div class="fl">${esc(l.hi)}！</div>
+    <div class="tip" style="--c:${l.color}">完成 <b>${CONFIG.TOPICS_NEEDED}</b> 個主題的「練習」就能蓋${l.country}章。目前完成 ${topicsDone(c)} / 4。</div>
+  </div></div>
+  <div class="band"><div class="wrap"><div class="topics">
+  ${l.topics.map((t,i)=>`<button class="topic" style="--c:${l.color}" data-go="${c}-${i+1}"><span class="ico" aria-hidden="true">${ICONS[c][i]}</span><span class="tx"><b class="tn">主題 ${i+1}</b><h3>${t.t}</h3><span class="pv fl">${t.words.slice(0,3).map(w=>esc(w[0])).join('・')}</span><small>${t.words.length} 詞・${t.sents.length} 句</small></span>${S.done[c+'-'+(i+1)]?'<span class="ok">完成</span>':''}</button>`).join('')}
+  </div></div></div>`;
+  pill();show('vCountry');
+}
+
+/* ===== topic ===== */
+let cur={c:null,t:0,tab:'w',si:0,quiz:null};
+function renderTopic(c,ti,tab){
+  const l=L(c),T=l.topics[ti];cur={c,t:ti,tab:tab||'w',si:0,quiz:null};
+  const key=c+'-'+(ti+1);
+  const shDone=T.sents.every((_,i)=>S.shadow[key+'-'+i]);
+  $('#vTopic').innerHTML=`<div class="band cband" style="--c:${l.color};padding-bottom:20px">${awning(c)}<div class="wrap">
+    <button class="back" data-go="${c}">← ${l.name}主題</button>
+    <h1><span class="hico" aria-hidden="true">${ICONS[c][ti]}</span>${T.t}</h1><div class="fl">${l.country}篇・主題 ${ti+1}</div>
+    <div class="tip" style="--c:${l.color}"><b>文化小知識</b>　${T.tip}</div></div></div>
+  <div class="wrap" style="padding:0 max(5vw,16px);--c:${l.color}">
+    <div class="tabs" role="tablist">
+      ${[['w','生詞'],['s','句型'],['r','跟讀'],['q','練習']].map(([k,n])=>`<button role="tab" data-tab="${k}" aria-selected="${cur.tab===k}">${n}${k==='r'&&shDone?'<span class="chk">✓</span>':''}${k==='q'&&S.done[key]?'<span class="chk">✓</span>':''}</button>`).join('')}
+    </div>
+    <div class="panel" id="panel"></div>
+  </div>`;
+  pill();show('vTopic');renderPanel();
+}
+const speedBar=()=>`<div class="speed">播放速度 <button data-rate="1" aria-pressed="${rate===1}">正常</button><button data-rate="0.65" aria-pressed="${rate!==1}">慢速</button></div>`;
+function renderPanel(){
+  const l=L(cur.c),T=l.topics[cur.t],P=$('#panel'),c=cur.c;
+  for(const b of document.querySelectorAll('[data-tab]'))b.setAttribute('aria-selected',b.dataset.tab===cur.tab);
+  if(cur.tab==='w'){
+    P.innerHTML=`<p class="hint">點一下卡片就會念給你聽。</p>${speedBar()}<div class="words">${T.words.map((w,i)=>`<button class="w" data-say="w${i}"><span class="fl">${esc(w[0])}</span>${c!=='vi'?`<span class="pr">${esc(w[1])}</span>`:''}<span class="zh">${esc(w[2])}</span>${ICON.spk}</button>`).join('')}</div>`;
+  }else if(cur.tab==='s'){
+    P.innerHTML=`<p class="hint">這些句子在文化節攤位就用得到！點句子聽發音。</p>${speedBar()}<div class="sents">${T.sents.map((s,i)=>`<button class="s" data-say="s${i}"><span class="fl">${esc(s[0])}</span>${c!=='vi'?`<span class="pr">${esc(s[1])}</span>`:''}<span class="zh">${esc(s[2])}</span>${ICON.spk}</button>`).join('')}</div>`;
+  }else if(cur.tab==='r')renderShadow();
+  else renderQuiz();
+}
+let VIEW={seg:true,pr:true,zh:true},SPD=0.8,loop=false;
+try{const v=JSON.parse(localStorage.getItem('sea4-view'));if(v)VIEW=Object.assign(VIEW,v)}catch(e){}
+function stopLoop(){loop=false;try{speechSynthesis.cancel()}catch(e){}const b=$('#shLoop');if(b)b.setAttribute('aria-pressed','false')}
+function sayLoop(text,c){if(!loop)return;const keep=rate;rate=SPD;speak(text,c);rate=keep;
+  const wait=()=>{if(!loop)return;if(speechSynthesis.speaking)setTimeout(wait,200);else setTimeout(()=>sayLoop(text,c),700)};setTimeout(wait,400)}
+function renderShadow(){
+  stopLoop();
+  const l=L(cur.c),T=l.topics[cur.t],i=cur.si,s=T.sents[i],key=cur.c+'-'+(cur.t+1),c=cur.c,hasPr=c!=='vi';
+  $('#panel').innerHTML=`<div class="sh2">
+   <details class="howto"><summary>怎麼跟讀？</summary><ol><li>按「播放」聽一次，可以切換慢／中／正常速度，或按「重複播放」一直聽。</li><li>點句子裡的詞塊，可以單獨聽那個詞。</li><li>按「錄音跟讀」，跟著唸一次，AI 會把聽懂的詞標成綠色。</li><li>右上角可以打勾選擇要不要顯示斷句、拼音、中文。</li></ol></details>
+   <div class="shhead"><b>${T.t}・${i+1} / ${T.sents.length}</b>
+    <span class="opts2"><label><input type="checkbox" data-view="seg" ${VIEW.seg?'checked':''}> 斷句</label>${hasPr?`<label><input type="checkbox" data-view="pr" ${VIEW.pr?'checked':''}> 拼音</label>`:''}<label><input type="checkbox" data-view="zh" ${VIEW.zh?'checked':''}> 中文</label></span></div>
+   <div class="sbox">
+    <div class="chips fl">${VIEW.seg?s[3].map((w,k)=>`<button class="chip" data-chunk="${k}">${esc(w)}</button>`).join(''):`<span class="whole">${esc(s[0])}</span>`}</div>
+    ${hasPr&&VIEW.pr?`<div class="spr">${esc(s[1])}</div>`:''}
+    ${VIEW.zh?`<div class="szh">${esc(s[2])}</div>`:''}
+   </div>
+   <div class="ctrl"><button class="pbtn fill" id="shPlay">▶ 播放</button><button class="pbtn" id="shLoop" aria-pressed="false">↻ 重複播放</button>
+    <span class="seg3">${[['0.6','慢'],['0.8','中'],['1','正常']].map(([v,n])=>`<button data-spd="${v}" aria-pressed="${+v===SPD}">${n}</button>`).join('')}</span></div>
+   <div class="recbox"><button class="pbtn navy" id="shMic">${ICON.mic} ${micBlocked?'我唸完了':'錄音跟讀'}</button>
+    <div class="res" id="shRes" aria-live="polite">${S.shadow[key+'-'+i]?'<div class="okline">✓ 這句已完成跟讀</div>':''}</div>
+    <p class="small">${micBlocked?'這個環境無法使用麥克風（例如預覽視窗或不支援的瀏覽器），請自己唸一次後按「我唸完了」。正式網址用 Chrome／Safari 開啟即可使用 AI 聽寫。':'「AI 聽寫」使用瀏覽器內建的語音辨識（Chrome 是 Google、Safari 是 Apple 的服務），會把這段聲音送去辨識；綠色是 AI 聽懂的詞，紅色是沒聽出來的詞。這是聽寫檢查，不是正式的發音評分。'}</p>
+   </div>
+   <div class="pdots">${T.sents.map((_,k)=>`<i class="${S.shadow[key+'-'+k]?'on':''} ${k===i?'cur':''}"></i>`).join('')}</div>
+   <div class="nav"><button id="shPrev" ${i===0?'disabled':''}>‹ 上一句</button><button id="shNext">${i===T.sents.length-1?'去練習 ›':'下一句 ›'}</button></div>
+  </div>`;
+  const play=t=>{const keep=rate;rate=SPD;speak(t,c);rate=keep};
+  $('#shPlay').onclick=()=>{stopLoop();play(s[0])};
+  $('#shLoop').onclick=e=>{if(loop){stopLoop();return}loop=true;e.currentTarget.setAttribute('aria-pressed','true');sayLoop(s[0],c)};
+  document.querySelectorAll('[data-spd]').forEach(b=>b.onclick=()=>{SPD=+b.dataset.spd;document.querySelectorAll('[data-spd]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  document.querySelectorAll('[data-chunk]').forEach(b=>b.onclick=()=>{stopLoop();play(s[3][+b.dataset.chunk])});
+  document.querySelectorAll('[data-view]').forEach(b=>b.onchange=()=>{VIEW[b.dataset.view]=b.checked;try{localStorage.setItem('sea4-view',JSON.stringify(VIEW))}catch(e){}renderShadow()});
+  $('#shPrev').onclick=()=>{cur.si--;renderShadow()};
+  $('#shNext').onclick=()=>{if(i===T.sents.length-1){stopLoop();cur.tab='q';renderPanel()}else{cur.si++;renderShadow()}};
+  $('#shMic').onclick=()=>{stopLoop();micBlocked?markShadow(null):listen(s)};
+}
+function markShadow(res){
+  const key=cur.c+'-'+(cur.t+1),i=cur.si,R=$('#shRes');
+  if(res===null){S.shadow[key+'-'+i]=true;save();R.innerHTML='<div class="okline">✓ 很棒！這句完成了</div>';refreshDots();return}
+  const {heard,hits,chunks}=res,n=hits.filter(Boolean).length,pct=Math.round(n/chunks.length*100);
+  if(pct>=CONFIG.SHADOW_PASS){S.shadow[key+'-'+i]=true;save()}
+  R.innerHTML=`<div class="heard">AI 聽寫：「${esc(heard)}」</div>
+   <div class="chips fl">${chunks.map((w,k)=>`<span class="chip ${hits[k]?'hit':'miss'}">${esc(w)}</span>`).join('')}</div>
+   <div class="okline" style="color:${pct>=CONFIG.SHADOW_PASS?'var(--ok)':'var(--bad)'}">AI 聽懂 ${n} / ${chunks.length} 個詞　${pct>=80?'太棒了！':pct>=CONFIG.SHADOW_PASS?'不錯喔！':'紅色的詞再聽一次、唸慢一點'}</div>`;
+  refreshDots();
+}
+function refreshDots(){const key=cur.c+'-'+(cur.t+1);document.querySelectorAll('.pdots i').forEach((d,k)=>d.classList.toggle('on',!!S.shadow[key+'-'+k]))}
+function listen(s){
+  const b=$('#shMic'),R=$('#shRes'),c=cur.c;let r;
+  try{r=new SR()}catch(e){micBlocked=true;renderShadow();return}
+  r.lang=L(c).lang;r.interimResults=false;r.maxAlternatives=5;
+  b.classList.add('rec');b.innerHTML=ICON.mic+' 聆聽中…';R.innerHTML='<div class="heard">請開始說話</div>';
+  r.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);let best=null;
+    for(const a of alts){const h=norm(a,c),hits=s[3].map(w=>{const x=norm(w,c);return !!x&&(c==='th'?h.includes(x):(' '+h+' ').includes(' '+x+' ')||h.includes(x))});const n=hits.filter(Boolean).length;if(!best||n>best.n)best={n,hits,heard:a}}
+    markShadow({heard:best.heard,hits:best.hits,chunks:s[3]})};
+  r.onerror=e=>{if(['not-allowed','service-not-allowed','audio-capture','language-not-supported'].includes(e.error)){micBlocked=true;toast('無法使用語音辨識，改用自評模式');renderShadow()}
+    else if(e.error==='no-speech')R.innerHTML='<div class="heard">沒有聽到聲音，再試一次</div>'};
+  r.onend=()=>{b.classList.remove('rec');b.innerHTML=ICON.mic+' 再錄一次'};
+  try{r.start()}catch(e){micBlocked=true;renderShadow()}
+}
+
+/* ===== quiz ===== */
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function buildQuiz(){
+  const l=L(cur.c),T=l.topics[cur.t];
+  const pool=T.words.map(w=>({f:w[0],z:w[2],k:'w'})).concat(T.sents.map(s=>({f:s[0],z:s[2],k:'s'})));
+  const all=l.topics.flatMap(t=>t.words.map(w=>({f:w[0],z:w[2],k:'w'})));
+  const sents=shuf(pool.filter(p=>p.k==='s')).slice(0,2),words=shuf(pool.filter(p=>p.k==='w')).slice(0,CONFIG.QUIZ_LEN-sents.length);
+  return shuf(words.concat(sents)).map((it,n)=>{
+    const type=it.k==='s'?(n%2?'listen':'z2f'):['listen','z2f','f2z'][n%3];
+    const same=pool.filter(p=>p.k===it.k&&p.z!==it.z&&p.f!==it.f);
+    let ds=shuf(same).slice(0,3);if(ds.length<3)ds=ds.concat(shuf(all.filter(p=>p.z!==it.z&&!ds.includes(p))).slice(0,3-ds.length));
+    return {it,type,opts:shuf([it,...ds])};
+  });
+}
+function renderQuiz(){
+  if(!cur.quiz)cur.quiz={qs:buildQuiz(),i:0,right:0,locked:false};
+  const Q=cur.quiz,P=$('#panel'),key=cur.c+'-'+(cur.t+1);
+  if(Q.i>=Q.qs.length){
+    const pass=Q.right>=CONFIG.PASS;const wasStamped=stamped(cur.c);
+    if(pass){S.done[key]=true;save()}
+    P.innerHTML=`<div class="q end"><div class="score" style="color:${pass?'var(--ok)':'var(--bad)'}">${Q.right} / ${Q.qs.length}</div>
+      <h2 style="font-size:26px;margin:6px 0 10px">${pass?'挑戰成功！':'差一點點！'}</h2>
+      <p class="hint">${pass?'這個主題完成了。':`答對 ${CONFIG.PASS} 題就過關，回去看看生詞再挑戰一次吧。`}</p>
+      <div class="btns"><button class="big" id="qAgain">再玩一次</button><button class="big fill" ${pass?`data-go="${cur.c}"`:'id="qBack"'}>${pass?'回到主題列表':'複習生詞'}</button></div></div>`;
+    $('#qAgain').onclick=()=>{cur.quiz=null;renderQuiz()};
+    const qb=$('#qBack');if(qb)qb.onclick=()=>{cur.tab='w';cur.quiz=null;renderPanel()};
+    if(pass){document.querySelectorAll('[data-tab="q"]').forEach(b=>{if(!b.querySelector('.chk'))b.insertAdjacentHTML('beforeend','<span class="chk">✓</span>')});
+      if(!wasStamped&&stamped(cur.c))celebrate(cur.c);}
+    pill();return;
+  }
+  const q=Q.qs[Q.i],showF=q.type==='f2z';
+  const ask=q.type==='listen'?'聽聽看，是什麼意思？':q.type==='z2f'?`「${esc(q.it.z)}」的${L(cur.c).name}怎麼說？`:'這是什麼意思？';
+  P.innerHTML=`<div class="q"><div class="cnt"><span>第 ${Q.i+1} / ${Q.qs.length} 題</span><span>答對 ${Q.right}</span></div>
+    <div class="ask">${ask}</div>
+    ${q.type==='listen'?`<button class="big fill" id="qPlay" style="margin:8px 0 16px">${ICON.play}播放</button>`:showF?`<div class="stem fl">${esc(q.it.f)}</div>`:'<div style="height:8px"></div>'}
+    <div class="opts">${q.opts.map((o,k)=>`<button class="opt ${q.type==='z2f'?'fl':''}" data-k="${k}">${esc(q.type==='z2f'?o.f:o.z)}</button>`).join('')}</div>
+    <div class="fb" id="qFb" aria-live="polite"></div></div>`;
+  if(q.type==='listen'){$('#qPlay').onclick=()=>speak(q.it.f,cur.c);setTimeout(()=>speak(q.it.f,cur.c),250)}
+  Q.locked=false;
+  P.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    if(Q.locked)return;Q.locked=true;const o=q.opts[+b.dataset.k],ok=o===q.it;
+    if(ok){Q.right++;b.classList.add('right');$('#qFb').innerHTML='<span style="color:var(--ok)">答對了！</span>'}
+    else{b.classList.add('wrong');P.querySelectorAll('.opt')[q.opts.indexOf(q.it)].classList.add('right');$('#qFb').innerHTML=`<span style="color:var(--bad)">正確答案：${esc(q.it.f)}（${esc(q.it.z)}）</span>`}
+    speak(q.it.f,cur.c);
+    setTimeout(()=>{Q.i++;renderQuiz()},ok?1100:2200);
+  });
+}
+function celebrate(c){
+  const l=L(c),n=stampCount();
+  $('#celeBody').innerHTML=`<div class="slot on" style="max-width:150px">${stampSVG(l,true)}</div><h2 style="font-size:26px">${l.country}章到手！</h2>
+   <p class="hint">${n>=4?'四國章都集滿了，快去兌換小禮物！':`已集 ${n} / 4 章，繼續挑戰下一個國家吧。`}</p>
+   <button class="big fill" style="--c:var(--coral)" id="celeOk">${n>=4?'打開兌換券':'太好了'}</button>`;
+  $('#cele').hidden=false;
+  $('#celeOk').onclick=()=>{$('#cele').hidden=true;if(n>=4)location.hash='redeem'};
+}
+
+/* ===== redeem ===== */
+function renderRedeem(){
+  const n=stampCount();
+  if(n>=4&&!S.code){S.code=Math.random().toString(36).slice(2,6).toUpperCase();S.finishedAt=Date.now();save()}
+  const fmt=t=>new Date(t).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  $('#vRedeem').innerHTML=`<div class="band hero"><div class="wrap" style="display:block">
+   <button class="back" data-go="" style="background:rgba(0,0,0,.08);color:var(--sunInk)">← 回首頁</button>
+   <div class="ticketbig"><h2>小禮物兌換券</h2>
+    <div class="row4">${LANGS.map(l=>slotHTML(l)).join('')}</div>
+    ${n<4?`<p class="lock">還差 ${4-n} 個國家的章，完成後這裡會出現兌換碼。</p>`:
+    `<div class="code">${S.code}</div><p style="margin:0 0 14px">完成時間 ${fmt(S.finishedAt)}<br>請把這個畫面出示給服務台工作人員</p>
+    ${S.redeemedAt?`<div class="redeemed">已兌換 ✓ ${fmt(S.redeemedAt)}</div>`:`<button class="hold" id="hold"><i></i><span>工作人員請長按 2 秒確認兌換</span></button>`}`}
+   </div></div></div>`;
+  pill();show('vRedeem');
+  const h=$('#hold');if(!h)return;
+  let st=0,raf;const bar=h.querySelector('i');
+  const tick=()=>{const p=Math.min(1,(performance.now()-st)/2000);bar.style.width=p*100+'%';if(p>=1){S.redeemedAt=Date.now();save();renderRedeem();toast('兌換完成！')}else raf=requestAnimationFrame(tick)};
+  const down=e=>{e.preventDefault();st=performance.now();raf=requestAnimationFrame(tick)};
+  const up=()=>{cancelAnimationFrame(raf);bar.style.width='0'};
+  h.addEventListener('pointerdown',down);h.addEventListener('pointerup',up);h.addEventListener('pointerleave',up);h.addEventListener('pointercancel',up);
+}
+
+/* ===== routing & events ===== */
+function route(){
+  const h=location.hash.slice(1);
+  stopLoop();
+  const m=h.match(/^(id|vi|th|ph)(?:-([1-4]))?$/);
+  if(h==='redeem')renderRedeem();
+  else if(m&&m[2])renderTopic(m[1],+m[2]-1);
+  else if(m)renderCountry(m[1]);
+  else renderHome();
+}
+window.addEventListener('hashchange',route);
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');
+  if(g){const v=g.dataset.go;if(location.hash.slice(1)===v)route();else location.hash=v;return}
+  const t=e.target.closest('[data-tab]');
+  if(t){stopLoop();cur.tab=t.dataset.tab;cur.si=0;if(cur.tab!=='q')cur.quiz=null;renderPanel();return}
+  const r=e.target.closest('[data-rate]');
+  if(r){rate=+r.dataset.rate;document.querySelectorAll('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.rate===rate));return}
+  const s=e.target.closest('[data-say]');
+  if(s){const T=L(cur.c).topics[cur.t],k=s.dataset.say;const it=k[0]==='w'?T.words[+k.slice(1)]:T.sents[+k.slice(1)];speak(it[0],cur.c,s)}
+});
+$('#go').onclick=()=>$('#countries').scrollIntoView({behavior:'smooth'});
+$('#logo').onclick=()=>{location.hash='';route()};
+$('#resetBtn').onclick=()=>ask('要清除這支手機上的所有闖關進度嗎？',()=>{S={done:{},shadow:{},finishedAt:null,redeemedAt:null,code:null};save();location.hash='';route();toast('進度已重設')});
+route();
+}
+</script>
+</body>
+</html>
