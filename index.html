@@ -27,10 +27,11 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--coral);outline-offs
 .fl{font-family:"Fredoka","Noto Sans Thai","Noto Sans TC",sans-serif}
 /* header */
 header{position:sticky;top:0;z-index:20;background:var(--sun);color:var(--sunInk);border-bottom:2px solid var(--sunInk)}
-header .wrap{display:flex;align-items:center;gap:12px;padding:10px max(5vw,16px)}
+header .wrap{display:flex;align-items:center;gap:12px;padding:10px max(5vw,16px);box-sizing:content-box}
 .logo{font-weight:900;font-size:18px;background:none;border:0;padding:6px 0;display:flex;align-items:center;gap:8px;color:var(--sunInk)}
 .logo i{width:30px;height:30px;border-radius:50%;background:var(--sunInk);color:var(--sun);display:grid;place-items:center;font-style:normal;font-family:Fredoka;font-size:15px}
-.pill{margin-left:auto;display:flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--sunInk);border-radius:99px;padding:4px 12px 4px 6px;font-weight:700;font-size:14px;color:var(--sunInk)}
+.sndbtn{margin-left:auto;width:40px;height:40px;border-radius:50%;border:2px solid var(--sunInk);background:#fff;color:var(--sunInk);display:grid;place-items:center;padding:0;flex:none}.sndbtn svg{width:20px;height:20px}
+.pill{display:flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--sunInk);border-radius:99px;padding:4px 12px 4px 6px;font-weight:700;font-size:14px;color:var(--sunInk)}
 .pill b{display:flex;gap:3px}.pill b span{width:14px;height:14px;border-radius:50%;border:2px dashed #b59b6a}
 .pill b span.on{border:0}
 /* hero */
@@ -60,7 +61,7 @@ header .wrap{display:flex;align-items:center;gap:12px;padding:10px max(5vw,16px)
 .how b{display:flex;align-items:center;gap:8px;font-size:17px}
 .how b::before{counter-increment:s;content:counter(s);width:28px;height:28px;flex:none;border-radius:50%;background:var(--sun);color:var(--sunInk);display:grid;place-items:center;font-family:Fredoka}
 .how p{margin:6px 0 0;color:var(--soft);font-size:15px}
-h2.sec{font-size:clamp(26px,3.4vw,34px);font-weight:900;margin-bottom:16px}
+h2.sec{font-size:clamp(21px,5.6vw,34px);font-weight:900;margin-bottom:16px}
 /* countries */
 .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .ticket{text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:0;overflow:hidden;display:flex;flex-direction:column;box-shadow:4px 4px 0 var(--ink);transition:transform .15s}
@@ -174,6 +175,53 @@ button.chip:hover{border-bottom-color:var(--c)}
 .recbox .small{font-size:14px;color:var(--soft);margin:10px 0 0}
 .okline{font-weight:900;color:var(--ok);margin-top:8px}
 .heard{margin-bottom:8px}
+
+/* two learning modes */
+.pcol{display:flex;flex-direction:column;align-items:center;gap:22px}
+.pcol .passport{width:100%}
+.topic{flex-direction:column;align-items:stretch!important;gap:12px;cursor:default}
+.trow{display:flex;gap:14px;align-items:flex-start}
+.stepchips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.stepchips span{background:light-dark(#fff3cf,#3a2e17);border-radius:99px;padding:3px 12px;font-size:14px;font-weight:700}
+.stepchips small{margin-left:auto;color:var(--c)!important;font-weight:700}
+.tbtns{display:flex;gap:10px;flex-wrap:wrap}
+.tbtns .pbtn{min-height:46px;font-size:16px;padding:8px 18px}
+.tbtns .pbtn.fill{background:var(--coral)}
+.modebar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;font-weight:700;color:var(--soft);font-size:15px}
+.modebar button{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:6px 14px;font-weight:700;min-height:40px;font-size:14px}
+.tabs.steps button{display:flex;align-items:center;justify-content:center;gap:6px;flex:1 1 0;padding:10px 6px}
+.tabs.steps i{font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--line);display:grid;place-items:center;font:700 13px Fredoka}
+.tabs.steps button[aria-selected=true] i{background:#fff;color:var(--c)}
+.flash{max-width:680px;margin:0 auto}
+.fcnt{display:flex;justify-content:space-between;font-weight:700}
+.fbar{height:10px;background:var(--line);border-radius:9px;margin:8px 0 14px;overflow:hidden}.fbar i{display:block;height:100%;background:var(--c);transition:width .3s}
+.fcard{width:100%;background:var(--card);border:2px solid var(--line);border-bottom:6px solid var(--c);border-radius:24px;padding:clamp(24px,6vw,48px) 20px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.fw{font-size:clamp(36px,9vw,64px);font-weight:600;line-height:1.2;overflow-wrap:anywhere}
+.fw.fs{font-size:clamp(26px,5.5vw,40px)}
+.fpr{color:var(--c);font-weight:700;font-size:clamp(17px,2.6vw,22px)}
+.fzh{font-size:clamp(18px,2.8vw,24px);font-weight:700}
+.ftap{display:flex;align-items:center;gap:6px;color:var(--soft);font-size:14px;margin-top:10px}.ftap svg{position:static;width:18px;height:18px;color:var(--c)}
+.nav button.go{background:var(--coral);border-color:var(--coral);color:#fff}
+.nexthint{margin:4px 0 12px;font-weight:700}
+.nextgo{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--c);color:#fff;border:2px solid var(--sunInk);border-radius:18px;padding:14px 20px;box-shadow:4px 4px 0 var(--sunInk);text-align:left;margin-bottom:14px}
+.nextgo:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--sunInk)}
+.nextgo span{display:flex;flex-direction:column;font-weight:900;font-size:clamp(19px,3.6vw,24px);line-height:1.25}
+.nextgo small{font-size:14px;font-weight:700;opacity:.9}
+.nextgo b{font-size:20px;white-space:nowrap}
+.small2 .big{font-size:15px;min-height:46px;padding:8px 16px;border-color:var(--line);color:var(--ink)}
+
+.confetti{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:70}
+.q.end.win{position:relative;overflow:hidden;background:linear-gradient(180deg,light-dark(#fff8e0,#2e2612),var(--card) 60%)}
+.party{display:flex;justify-content:center;gap:18px;font-size:44px;line-height:1;margin-bottom:4px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.party span{display:inline-block;animation:pop .7s cubic-bezier(.2,1.8,.4,1) both, wiggle 1.4s ease-in-out .8s infinite}
+.party span:nth-child(2){animation-delay:.12s,.9s;font-size:.8em}.party span:nth-child(3){animation-delay:.24s,1s}
+@keyframes pop{0%{transform:scale(0) rotate(-40deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg) translateY(-4px)}}
+.win .score{animation:pop .6s cubic-bezier(.2,1.8,.4,1) .2s both}
+.win h2{animation:pop .5s cubic-bezier(.2,1.6,.4,1) .35s both}
+.win .nextgo{animation:pop .5s cubic-bezier(.2,1.6,.4,1) .55s both, nudge 1.6s ease-in-out 1.4s infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+.celebrate .slot{animation:pop .7s cubic-bezier(.2,1.8,.4,1) both}
 /* quiz */
 .q{max-width:640px;margin:0 auto;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:clamp(18px,4vw,30px)}
 .q .cnt{display:flex;justify-content:space-between;font-weight:700;color:var(--soft);font-size:14px}
@@ -229,13 +277,32 @@ footer button{background:none;border:0;text-decoration:underline;color:var(--sof
 @media(max-width:860px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.how{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.hero .wrap{grid-template-columns:1fr}.topics{grid-template-columns:1fr}}
 @media(max-width:420px){.passport{grid-template-columns:1fr}.pp-l{border-right:0;border-bottom:2px dashed #d8c59c}.how{grid-template-columns:1fr}.ticket .top .fl{font-size:24px}.pill .t{display:none}}
+
+/* responsive: tablet + phone */
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}.passport{max-width:560px;width:100%;margin:0 auto}.hero p{max-width:none}}
+@media(min-width:601px) and (max-width:900px){.hero h1{font-size:clamp(40px,7vw,54px)}}
+@media(max-width:520px){
+ .grid4{grid-template-columns:1fr;gap:12px}
+ .ticket{flex-direction:row;box-shadow:3px 3px 0 var(--ink)}
+ .ticket .top{width:42%;flex:none;display:flex;flex-direction:column;justify-content:center;padding:14px 12px}
+ .ticket .top .fl{font-size:22px!important}
+ .ticket .bot{justify-content:center;padding:12px 14px}
+ .ticket h3{font-size:19px}
+ .how div{padding:12px 14px}
+ .topic .ico{width:54px;height:54px;font-size:32px;border-radius:15px}
+ .shhead{flex-direction:column;align-items:flex-start}
+ .ctrl .pbtn{flex:1 1 auto;justify-content:center}
+ .seg3{flex:1 1 100%}.seg3 button{flex:1}
+}
+@media(max-height:500px) and (orientation:landscape){header{position:static}.tabs{top:0}}
+@media(min-width:1400px){.wrap{max-width:1200px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <button class="logo" id="logo" aria-label="回首頁"><i>4</i>四國語言闖關</button>
-  <div class="pill" id="pill" aria-live="polite"><b id="pillDots"></b><span class="t" id="pillTxt">0 / 4 章</span></div>
+  <button class="sndbtn" id="sndBtn" aria-label="音效開關" aria-pressed="true"></button><div class="pill" id="pill" aria-live="polite"><b id="pillDots"></b><span class="t" id="pillTxt">0 / 4 章</span></div>
 </div></header>
 
 <main>
@@ -244,10 +311,9 @@ footer button{background:none;border:0;text-decoration:underline;color:var(--sof
     <div>
       <div class="event"><span>2026 移民工文化節</span><span>12/12（六）10:00–20:00</span><span>三創生活園區</span></div>
       <h1>開口說四國語，<br>集章換小禮物！</h1>
-      <p>印尼語、越南語、泰語、菲律賓語，每國 4 個生活主題：打招呼、自我介紹、數字與價錢、買飲料與食物。聽一聽、跟著唸、答對小挑戰，就能在你的語言護照蓋上一枚章。</p>
-      <button class="cta" id="go">開始闖關 →</button>
+      <p>印尼語、越南語、菲律賓語、泰語，每國 4 個生活主題：打招呼、自我介紹、數字與價錢、買飲料與食物。聽一聽、跟著唸、答對小挑戰，就能在你的語言護照蓋上一枚章。</p>
     </div>
-    <div class="passport" aria-label="我的語言護照">
+    <div class="pcol"><div class="passport" aria-label="我的語言護照">
       <div class="pp-l">
         <small>LANGUAGE PASSPORT</small>
         <h3>我的語言護照</h3>
@@ -255,13 +321,14 @@ footer button{background:none;border:0;text-decoration:underline;color:var(--sof
       </div>
       <div class="pp-r" id="ppSlots"></div>
     </div>
+    <button class="cta" id="go">開始闖關 ↓</button></div>
   </div></div>
 
-  <div class="band"><div class="wrap">
+  <div class="band" id="howto"><div class="wrap">
     <h2 class="sec"><span class="tag pink">怎麼玩？簡單 4 步驟！</span></h2>
     <div class="how">
       <div><b>選一個國家</b><p>從下方四張車票挑一個你想認識的語言。</p></div>
-      <div><b>學生詞與句型</b><p>點卡片就會念給你聽，可以切換慢速。</p></div>
+      <div><b>選擇學習方式</b><p>「開始引導學習」一步一步學；「更多練習」自由選擇想練的部分。</p></div>
       <div><b>跟讀＋練習</b><p>按麥克風跟著唸，AI 幫你打分數；再完成 5 題小挑戰。</p></div>
       <div><b>集滿 4 章兌換</b><p>每國完成 <span id="needTxt">1</span> 個主題就蓋章，集滿四國到服務台換禮物。</p></div>
     </div>
@@ -343,21 +410,6 @@ const LANGS=[
   words:[['phở bò','pho bo','牛肉河粉'],['gỏi cuốn','goi cuon','越南生春捲'],['bánh mì','banh mi','越式法國麵包'],['cà phê sữa đá','ca phe sua da','煉乳冰咖啡'],['trà đá','tra da','冰茶'],['cho tôi','cho toi','給我'],['một tô','mot to','一碗'],['một ly','mot ly','一杯'],['ít đường','it duong','少糖'],['không đường','khong duong','無糖'],['không đá','khong da','去冰'],['cay','cay','辣'],['không cay','khong cay','不辣']],
   sents:[['Cho tôi|một tô|phở bò.','cho toi mot to pho bo','給我一碗牛肉河粉。'],['Cho tôi|một ly|cà phê sữa đá.','cho toi mot ly ca phe sua da','給我一杯煉乳冰咖啡。'],['Ít đường,|không đá|nhé.','it duong, khong da nhe','少糖，去冰喔。'],['Không cay|nhé.','khong cay nhe','不要辣喔。']]}
  ]},
-{id:'th',name:'泰語',country:'泰國',code:'TH',lang:'th-TH',hi:'สวัสดี',color:'var(--th)',
- topics:[
- {t:'打招呼問候語',tip:'泰語的<b>語尾助詞</b>分男女：女生說 ค่ะ（kha）、男生說 ครับ（khrab），加在句尾表示禮貌。',
-  words:[['สวัสดี','Sa-wat-di','你好'],['ค่ะ','Kha','語尾助詞（女生）'],['ครับ','Khrab','語尾助詞（男生）'],['ขอบคุณ','Khop-khun','謝謝'],['สบายดีไหม','Sa-bai-di-mai','你好嗎？'],['ไม่เป็นไร','Mai-pen-rai','沒關係／不客氣']],
-  sents:[['สวัสดี|ค่ะ','Sa-wat-di kha','你好（女生說的）'],['สวัสดี|ครับ','Sa-wat-di khrab','你好（男生說的）'],['ขอบคุณ|ค่ะ','Khop-khun kha','謝謝（女生說的）'],['ขอบคุณ|ครับ','Khop-khun khrab','謝謝（男生說的）']]},
- {t:'自我介紹',tip:'泰語的「我」也分男女：男生用 <b>ผม（Phom）</b>、女生用 <b>ฉัน（Chan）</b>。',
-  words:[['ผม','Phom','我（男生）'],['ฉัน','Chan','我（女生）'],['คุณ','Khun','你／先生／小姐'],['เธอ','Thoe','你／妳'],['เป็น','Pen','是'],['คน','Khon','人'],['ชื่อ','Chue','叫／名字'],['ไต้หวัน','Tai-wan','台灣'],['ไทย','Thai','泰國']],
-  sents:[['ฉัน|ชื่อ|มารี','Chan chue Maree','我叫瑪麗。'],['ฉัน|เป็น|คน|ไต้หวัน','Chan pen khon Taiwan','我是台灣人。'],['ยินดี|ที่|ได้|รู้จัก','Yin-dee tee dai ru-chak','很高興認識你。']]},
- {t:'數字與價錢',tip:'泰國的錢叫<b>泰銖 บาท（baht）</b>；問價錢時句尾記得加 คะ／ครับ 更有禮貌。',
-  words:[['หนึ่ง','nueng','一'],['สอง','song','二'],['สาม','sam','三'],['สี่','see','四'],['ห้า','ha','五'],['หก','hok','六'],['เจ็ด','jet','七'],['แปด','paet','八'],['เก้า','kao','九'],['สิบ','sip','十'],['ร้อย','roi','百'],['สามร้อย','sam-roi','三百'],['บาท','baht','泰銖'],['อันนี้','An-nee','這個'],['ทั้งหมด','Thang-mod','一共'],['เท่าไหร่','thao-rai','多少錢']],
-  sents:[['อันนี้|เท่าไหร่|คะ','An-nee thao-rai kha?','這個多少錢？'],['อันนี้|ห้าสิบ|บาท|ค่ะ','An-nee ha-sip baht kha','這個 50 泰銖。'],['ทั้งหมด|เท่าไหร่|คะ','Thang-mod thao-rai kha?','一共多少錢？'],['ทั้งหมด|สามร้อย|บาท|ค่ะ','Thang-mod sam-roi baht kha','一共 300 泰銖。']]},
- {t:'買飲料與食物',tip:'<b>芒果糯米飯</b>淋上椰奶是泰國國民甜點；你知道嗎？<b>月亮蝦餅</b>其實是「台式泰菜」，不是泰國本土料理喔！點泰奶也能選甜度和冰塊，跟台灣手搖飲一樣。',
-  words:[['ข้าวเหนียวมะม่วง','khao-niao-ma-muang','芒果糯米'],['ต้มยำกุ้ง','tom-yam-kung','酸辣蝦湯（冬蔭功）'],['ชาไทย','cha-thai','泰奶'],['ไม่หวาน','mai-wan','無糖'],['หวานน้อย','wan-noi','微糖'],['หวานปกติ','wan-pok-ka-ti','正常甜（全糖）'],['ไม่ใส่น้ำแข็ง','mai-sai-nam-khaeng','不加冰'],['น้ำแข็งน้อย','nam-khaeng-noi','微冰'],['น้ำแข็งปกติ','nam-khaeng-pok-ka-ti','正常冰'],['แก้ว','kaeo','杯（量詞）'],['เอา','ao','要'],['ไม่เอา','mai-ao','不要'],['เผ็ดมาก','phet-mak','大辣'],['เผ็ดกลาง','phet-klang','中辣'],['เผ็ดน้อย','phet-noi','小辣']],
-  sents:[['ฉัน|เอา|ข้าวเหนียวมะม่วง|หนึ่ง|ที่|ค่ะ','Chan ao khao-niao-ma-muang nueng thi kha','我要一個芒果糯米。'],['ฉัน|เอา|ต้มยำกุ้ง|หนึ่ง|ที่|เผ็ดน้อย|นะคะ','Chan ao tom-yam-kung nueng thi, phet-noi na kha','我要一個酸辣蝦湯，小辣。'],['ฉัน|เอา|ชาไทย|แก้ว|นึง|ค่ะ','Chan ao cha-thai kaeo nueng kha','我要一杯泰奶。'],['หวานน้อย|ไม่ใส่น้ำแข็ง','Wan-noi, mai-sai-nam-khaeng','微糖，不加冰。']]}
- ]},
 {id:'ph',name:'菲律賓語',country:'菲律賓',code:'PH',lang:'fil-PH',hi:'Kumusta',color:'var(--ph)',
  topics:[
  {t:'打招呼問候語',tip:'對長輩或客人在句尾加 <b>po</b> 表示禮貌，例如 Salamat po（謝謝您），跟泰語的 ค่ะ／ครับ 很像！',
@@ -372,6 +424,21 @@ const LANGS=[
  {t:'買飲料與食物',tip:'<b>Halo-halo</b> 是「混在一起」的意思，配料豐富的綜合刨冰。菲律賓人幾乎每餐都配<b>白飯（kanin）</b>，炸雞、甚至義大利麵都可能配飯！',
   words:[['halo-halo','ha-lo ha-lo','綜合刨冰'],['sisig','si-sig','鐵板豬肉'],['kanin','ka-nin','白飯'],['adobo','a-do-bo','醬醋燉肉'],['kape','ka-pe','咖啡'],['gusto ko','gus-to ko','我想要'],['isa','i-sa','一（個／份）'],['maanghang','ma-ang-hang','辣'],['hindi maanghang','hin-di ma-ang-hang','不辣'],['walang asukal','wa-lang a-su-kal','無糖'],['konting asukal','kon-ting a-su-kal','少糖'],['walang yelo','wa-lang ye-lo','去冰'],['masarap','ma-sa-rap','好吃']],
   sents:[['Gusto ko|ng|isang|halo-halo.','gus-to ko nang i-sang ha-lo ha-lo','我想要一份綜合刨冰。'],['Isang kape|po,|walang asukal.','i-sang ka-pe po, wa-lang a-su-kal','一杯咖啡，無糖。'],['Isang sisig at kanin po.','i-sang si-sig at ka-nin po','一份鐵板豬肉和白飯，謝謝。'],['Masarap!','ma-sa-rap','好好吃！']]}
+ ]},
+{id:'th',name:'泰語',country:'泰國',code:'TH',lang:'th-TH',hi:'สวัสดี',color:'var(--th)',
+ topics:[
+ {t:'打招呼問候語',tip:'泰語的<b>語尾助詞</b>分男女：女生說 ค่ะ（kha）、男生說 ครับ（khrab），加在句尾表示禮貌。',
+  words:[['สวัสดี','Sa-wat-di','你好'],['ค่ะ','Kha','語尾助詞（女生）'],['ครับ','Khrab','語尾助詞（男生）'],['ขอบคุณ','Khop-khun','謝謝'],['สบายดีไหม','Sa-bai-di-mai','你好嗎？'],['ไม่เป็นไร','Mai-pen-rai','沒關係／不客氣']],
+  sents:[['สวัสดี|ค่ะ','Sa-wat-di kha','你好（女生說的）'],['สวัสดี|ครับ','Sa-wat-di khrab','你好（男生說的）'],['ขอบคุณ|ค่ะ','Khop-khun kha','謝謝（女生說的）'],['ขอบคุณ|ครับ','Khop-khun khrab','謝謝（男生說的）']]},
+ {t:'自我介紹',tip:'泰語的「我」也分男女：男生用 <b>ผม（Phom）</b>、女生用 <b>ฉัน（Chan）</b>。',
+  words:[['ผม','Phom','我（男生）'],['ฉัน','Chan','我（女生）'],['คุณ','Khun','你／先生／小姐'],['เธอ','Thoe','你／妳'],['เป็น','Pen','是'],['คน','Khon','人'],['ชื่อ','Chue','叫／名字'],['ไต้หวัน','Tai-wan','台灣'],['ไทย','Thai','泰國']],
+  sents:[['ฉัน|ชื่อ|มารี','Chan chue Maree','我叫瑪麗。'],['ฉัน|เป็น|คน|ไต้หวัน','Chan pen khon Taiwan','我是台灣人。'],['ยินดี|ที่|ได้|รู้จัก','Yin-dee tee dai ru-chak','很高興認識你。']]},
+ {t:'數字與價錢',tip:'泰國的錢叫<b>泰銖 บาท（baht）</b>；問價錢時句尾記得加 คะ／ครับ 更有禮貌。',
+  words:[['หนึ่ง','nueng','一'],['สอง','song','二'],['สาม','sam','三'],['สี่','see','四'],['ห้า','ha','五'],['หก','hok','六'],['เจ็ด','jet','七'],['แปด','paet','八'],['เก้า','kao','九'],['สิบ','sip','十'],['ร้อย','roi','百'],['สามร้อย','sam-roi','三百'],['บาท','baht','泰銖'],['อันนี้','An-nee','這個'],['ทั้งหมด','Thang-mod','一共'],['เท่าไหร่','thao-rai','多少錢']],
+  sents:[['อันนี้|เท่าไหร่|คะ','An-nee thao-rai kha?','這個多少錢？'],['อันนี้|ห้าสิบ|บาท|ค่ะ','An-nee ha-sip baht kha','這個 50 泰銖。'],['ทั้งหมด|เท่าไหร่|คะ','Thang-mod thao-rai kha?','一共多少錢？'],['ทั้งหมด|สามร้อย|บาท|ค่ะ','Thang-mod sam-roi baht kha','一共 300 泰銖。']]},
+ {t:'買飲料與食物',tip:'<b>芒果糯米飯</b>淋上椰奶是泰國國民甜點；你知道嗎？<b>月亮蝦餅</b>其實是「台式泰菜」，不是泰國本土料理喔！點泰奶也能選甜度和冰塊，跟台灣手搖飲一樣。',
+  words:[['ข้าวเหนียวมะม่วง','khao-niao-ma-muang','芒果糯米'],['ต้มยำกุ้ง','tom-yam-kung','酸辣蝦湯（冬蔭功）'],['ชาไทย','cha-thai','泰奶'],['ไม่หวาน','mai-wan','無糖'],['หวานน้อย','wan-noi','微糖'],['หวานปกติ','wan-pok-ka-ti','正常甜（全糖）'],['ไม่ใส่น้ำแข็ง','mai-sai-nam-khaeng','不加冰'],['น้ำแข็งน้อย','nam-khaeng-noi','微冰'],['น้ำแข็งปกติ','nam-khaeng-pok-ka-ti','正常冰'],['แก้ว','kaeo','杯（量詞）'],['เอา','ao','要'],['ไม่เอา','mai-ao','不要'],['เผ็ดมาก','phet-mak','大辣'],['เผ็ดกลาง','phet-klang','中辣'],['เผ็ดน้อย','phet-noi','小辣']],
+  sents:[['ฉัน|เอา|ข้าวเหนียวมะม่วง|หนึ่ง|ที่|ค่ะ','Chan ao khao-niao-ma-muang nueng thi kha','我要一個芒果糯米。'],['ฉัน|เอา|ต้มยำกุ้ง|หนึ่ง|ที่|เผ็ดน้อย|นะคะ','Chan ao tom-yam-kung nueng thi, phet-noi na kha','我要一個酸辣蝦湯，小辣。'],['ฉัน|เอา|ชาไทย|แก้ว|นึง|ค่ะ','Chan ao cha-thai kaeo nueng kha','我要一杯泰奶。'],['หวานน้อย|ไม่ใส่น้ำแข็ง','Wan-noi, mai-sai-nam-khaeng','微糖，不加冰。']]}
  ]}
 ];
 
@@ -469,24 +536,28 @@ function renderCountry(c){
     <div class="tip" style="--c:${l.color}">完成 <b>${CONFIG.TOPICS_NEEDED}</b> 個主題的「練習」就能蓋${l.country}章。目前完成 ${topicsDone(c)} / 4。</div>
   </div></div>
   <div class="band"><div class="wrap"><div class="topics">
-  ${l.topics.map((t,i)=>`<button class="topic" style="--c:${l.color}" data-go="${c}-${i+1}"><span class="ico" aria-hidden="true">${ICONS[c][i]}</span><span class="tx"><b class="tn">主題 ${i+1}</b><h3>${t.t}</h3><span class="pv fl">${t.words.slice(0,3).map(w=>esc(w[0])).join('・')}</span><small>${t.words.length} 詞・${t.sents.length} 句</small></span>${S.done[c+'-'+(i+1)]?'<span class="ok">完成</span>':''}</button>`).join('')}
+  ${l.topics.map((t,i)=>`<div class="topic" style="--c:${l.color}"><div class="trow"><span class="ico" aria-hidden="true">${ICONS[c][i]}</span><span class="tx"><b class="tn">主題 ${i+1}</b><h3>${t.t}</h3><span class="pv fl">${t.words.slice(0,3).map(w=>esc(w[0])).join('・')}</span></span>${S.done[c+'-'+(i+1)]?'<span class="ok">完成</span>':''}</div>
+    <div class="stepchips">${STEPS.map(([k,n],j)=>`<span>${j+1} ${n}</span>`).join('')}<small>${t.words.length} 詞・${t.sents.length} 句</small></div>
+    <div class="tbtns"><button class="pbtn fill" data-go="${c}-${i+1}-g">開始引導學習 ›</button><button class="pbtn" data-go="${c}-${i+1}">更多練習</button></div></div>`).join('')}
   </div></div></div>`;
   pill();show('vCountry');
 }
 
 /* ===== topic ===== */
-let cur={c:null,t:0,tab:'w',si:0,quiz:null};
-function renderTopic(c,ti,tab){
-  const l=L(c),T=l.topics[ti];cur={c,t:ti,tab:tab||'w',si:0,quiz:null};
+const STEPS=[['w','生詞'],['s','句型'],['r','跟讀'],['q','練習']];
+let cur={c:null,t:0,tab:'w',si:0,gi:0,quiz:null,g:false};
+function renderTopic(c,ti,g){
+  const l=L(c),T=l.topics[ti];cur={c,t:ti,tab:'w',si:0,gi:0,quiz:null,g:!!g};
   const key=c+'-'+(ti+1);
   const shDone=T.sents.every((_,i)=>S.shadow[key+'-'+i]);
   $('#vTopic').innerHTML=`<div class="band cband" style="--c:${l.color};padding-bottom:20px">${awning(c)}<div class="wrap">
     <button class="back" data-go="${c}">← ${l.name}主題</button>
-    <h1><span class="hico" aria-hidden="true">${ICONS[c][ti]}</span>${T.t}</h1><div class="fl">${l.country}篇・主題 ${ti+1}</div>
+    <h1><span class="hico" aria-hidden="true">${ICONS[c][ti]}</span>${T.t}</h1><div class="fl">${l.country}篇・主題 ${ti+1}・${g?'引導學習':'更多練習'}</div>
     <div class="tip" style="--c:${l.color}"><b>文化小知識</b>　${T.tip}</div></div></div>
-  <div class="wrap" style="padding:0 max(5vw,16px);--c:${l.color}">
-    <div class="tabs" role="tablist">
-      ${[['w','生詞'],['s','句型'],['r','跟讀'],['q','練習']].map(([k,n])=>`<button role="tab" data-tab="${k}" aria-selected="${cur.tab===k}">${n}${k==='r'&&shDone?'<span class="chk">✓</span>':''}${k==='q'&&S.done[key]?'<span class="chk">✓</span>':''}</button>`).join('')}
+  <div class="wrap" style="padding:0 max(5vw,16px);box-sizing:content-box;--c:${l.color}">
+    ${g?`<div class="modebar"><span>引導學習：跟著 4 個步驟一步一步學</span><button data-go="${c}-${ti+1}">切換到更多練習</button></div>`:`<div class="modebar"><span>更多練習：自由選擇想練的部分</span><button data-go="${c}-${ti+1}-g">切換到引導學習</button></div>`}
+    <div class="tabs ${g?'steps':''}" role="tablist">
+      ${STEPS.map(([k,n],j)=>`<button role="tab" data-tab="${k}" aria-selected="${cur.tab===k}">${g?`<i>${j+1}</i>`:''}${n}${k==='r'&&shDone?'<span class="chk">✓</span>':''}${k==='q'&&S.done[key]?'<span class="chk">✓</span>':''}</button>`).join('')}
     </div>
     <div class="panel" id="panel"></div>
   </div>`;
@@ -496,12 +567,28 @@ const speedBar=()=>`<div class="speed">播放速度 <button data-rate="1" aria-p
 function renderPanel(){
   const l=L(cur.c),T=l.topics[cur.t],P=$('#panel'),c=cur.c;
   for(const b of document.querySelectorAll('[data-tab]'))b.setAttribute('aria-selected',b.dataset.tab===cur.tab);
+  if(cur.g&&(cur.tab==='w'||cur.tab==='s'))return renderFlash();
   if(cur.tab==='w'){
     P.innerHTML=`<p class="hint">點一下卡片就會念給你聽。</p>${speedBar()}<div class="words">${T.words.map((w,i)=>`<button class="w" data-say="w${i}"><span class="fl">${esc(w[0])}</span>${c!=='vi'?`<span class="pr">${esc(w[1])}</span>`:''}<span class="zh">${esc(w[2])}</span>${ICON.spk}</button>`).join('')}</div>`;
   }else if(cur.tab==='s'){
     P.innerHTML=`<p class="hint">這些句子在文化節攤位就用得到！點句子聽發音。</p>${speedBar()}<div class="sents">${T.sents.map((s,i)=>`<button class="s" data-say="s${i}"><span class="fl">${esc(s[0])}</span>${c!=='vi'?`<span class="pr">${esc(s[1])}</span>`:''}<span class="zh">${esc(s[2])}</span>${ICON.spk}</button>`).join('')}</div>`;
   }else if(cur.tab==='r')renderShadow();
   else renderQuiz();
+}
+function nextStep(){const i=STEPS.findIndex(x=>x[0]===cur.tab);stopLoop();cur.tab=STEPS[Math.min(i+1,3)][0];cur.gi=0;cur.si=0;cur.quiz=null;renderPanel();window.scrollTo({top:$('.tabs').offsetTop-70,behavior:'smooth'})}
+function renderFlash(){
+  const l=L(cur.c),T=l.topics[cur.t],c=cur.c,isW=cur.tab==='w',list=isW?T.words:T.sents,i=cur.gi,it=list[i],last=i===list.length-1;
+  $('#panel').innerHTML=`<div class="flash">
+   <div class="fcnt"><b>${isW?'步驟 1・生詞':'步驟 2・句型'}</b><span>${i+1} / ${list.length}</span></div>
+   <div class="fbar"><i style="width:${(i+1)/list.length*100}%"></i></div>
+   <button class="fcard" id="fSay"><span class="fl fw ${isW?'':'fs'}">${esc(it[0])}</span>${c!=='vi'?`<span class="fpr">${esc(it[1])}</span>`:''}<span class="fzh">${esc(it[2])}</span><span class="ftap">${ICON.spk} 點卡片再聽一次</span></button>
+   <div class="ctrl" style="justify-content:center"><span class="seg3">${[['0.6','慢'],['0.8','中'],['1','正常']].map(([v,n])=>`<button data-spd="${v}" aria-pressed="${+v===SPD}">${n}</button>`).join('')}</span></div>
+   <div class="nav"><button id="fPrev" ${i===0?'disabled':''}>‹ 上一個</button><button id="fNext" class="${last?'go':''}">${last?(isW?'下一步：句型 ›':'下一步：跟讀 ›'):'下一個 ›'}</button></div></div>`;
+  const play=()=>{const k=rate;rate=SPD;speak(it[0],c);rate=k};
+  $('#fSay').onclick=play;setTimeout(play,250);
+  document.querySelectorAll('[data-spd]').forEach(b=>b.onclick=()=>{SPD=+b.dataset.spd;document.querySelectorAll('[data-spd]').forEach(x=>x.setAttribute('aria-pressed',x===b));play()});
+  $('#fPrev').onclick=()=>{cur.gi--;renderFlash()};
+  $('#fNext').onclick=()=>{if(last)nextStep();else{cur.gi++;renderFlash()}};
 }
 let VIEW={seg:true,pr:true,zh:true},SPD=0.8,loop=false;
 try{const v=JSON.parse(localStorage.getItem('sea4-view'));if(v)VIEW=Object.assign(VIEW,v)}catch(e){}
@@ -527,7 +614,7 @@ function renderShadow(){
     <p class="small">${micBlocked?'這個環境無法使用麥克風（例如預覽視窗或不支援的瀏覽器），請自己唸一次後按「我唸完了」。正式網址用 Chrome／Safari 開啟即可使用 AI 聽寫。':'「AI 聽寫」使用瀏覽器內建的語音辨識（Chrome 是 Google、Safari 是 Apple 的服務），會把這段聲音送去辨識；綠色是 AI 聽懂的詞，紅色是沒聽出來的詞。這是聽寫檢查，不是正式的發音評分。'}</p>
    </div>
    <div class="pdots">${T.sents.map((_,k)=>`<i class="${S.shadow[key+'-'+k]?'on':''} ${k===i?'cur':''}"></i>`).join('')}</div>
-   <div class="nav"><button id="shPrev" ${i===0?'disabled':''}>‹ 上一句</button><button id="shNext">${i===T.sents.length-1?'去練習 ›':'下一句 ›'}</button></div>
+   <div class="nav"><button id="shPrev" ${i===0?'disabled':''}>‹ 上一句</button><button id="shNext" class="${i===T.sents.length-1?'go':''}">${i===T.sents.length-1?(cur.g?'下一步：練習 ›':'去練習 ›'):'下一句 ›'}</button></div>
   </div>`;
   const play=t=>{const keep=rate;rate=SPD;speak(t,c);rate=keep};
   $('#shPlay').onclick=()=>{stopLoop();play(s[0])};
@@ -536,14 +623,14 @@ function renderShadow(){
   document.querySelectorAll('[data-chunk]').forEach(b=>b.onclick=()=>{stopLoop();play(s[3][+b.dataset.chunk])});
   document.querySelectorAll('[data-view]').forEach(b=>b.onchange=()=>{VIEW[b.dataset.view]=b.checked;try{localStorage.setItem('sea4-view',JSON.stringify(VIEW))}catch(e){}renderShadow()});
   $('#shPrev').onclick=()=>{cur.si--;renderShadow()};
-  $('#shNext').onclick=()=>{if(i===T.sents.length-1){stopLoop();cur.tab='q';renderPanel()}else{cur.si++;renderShadow()}};
+  $('#shNext').onclick=()=>{if(i===T.sents.length-1){nextStep()}else{cur.si++;renderShadow()}};
   $('#shMic').onclick=()=>{stopLoop();micBlocked?markShadow(null):listen(s)};
 }
 function markShadow(res){
   const key=cur.c+'-'+(cur.t+1),i=cur.si,R=$('#shRes');
   if(res===null){S.shadow[key+'-'+i]=true;save();R.innerHTML='<div class="okline">✓ 很棒！這句完成了</div>';refreshDots();return}
   const {heard,hits,chunks}=res,n=hits.filter(Boolean).length,pct=Math.round(n/chunks.length*100);
-  if(pct>=CONFIG.SHADOW_PASS){S.shadow[key+'-'+i]=true;save()}
+  if(pct>=CONFIG.SHADOW_PASS){S.shadow[key+'-'+i]=true;save();sfx('ok')}
   R.innerHTML=`<div class="heard">AI 聽寫：「${esc(heard)}」</div>
    <div class="chips fl">${chunks.map((w,k)=>`<span class="chip ${hits[k]?'hit':'miss'}">${esc(w)}</span>`).join('')}</div>
    <div class="okline" style="color:${pct>=CONFIG.SHADOW_PASS?'var(--ok)':'var(--bad)'}">AI 聽懂 ${n} / ${chunks.length} 個詞　${pct>=80?'太棒了！':pct>=CONFIG.SHADOW_PASS?'不錯喔！':'紅色的詞再聽一次、唸慢一點'}</div>`;
@@ -584,14 +671,20 @@ function renderQuiz(){
   if(Q.i>=Q.qs.length){
     const pass=Q.right>=CONFIG.PASS;const wasStamped=stamped(cur.c);
     if(pass){S.done[key]=true;save()}
-    P.innerHTML=`<div class="q end"><div class="score" style="color:${pass?'var(--ok)':'var(--bad)'}">${Q.right} / ${Q.qs.length}</div>
-      <h2 style="font-size:26px;margin:6px 0 10px">${pass?'挑戰成功！':'差一點點！'}</h2>
+    const nx=nextCountry(cur.c),left=4-stampCount(),nm=L(cur.c).name;
+    const passBtns=nx?`<p class="nexthint">還差 <b>${left}</b> 國就能換小禮物，先去每一國蓋章吧！</p>
+      <button class="nextgo" data-go="${nx}-1-g" style="--c:${L(nx).color}"><span><small>下一站・從「${L(nx).topics[0].t}」開始</small>${L(nx).name}</span><b>出發 ›</b></button>`
+      :`<button class="nextgo" data-go="redeem" style="--c:var(--coral)"><span><small>四國章都集滿了！</small>打開兌換券</span><b>›</b></button>`;
+    P.innerHTML=`<div class="q end ${pass?'win':''}">${pass?'<div class="party" aria-hidden="true"><span>🎉</span><span>⭐</span><span>🎊</span></div>':''}<div class="score" style="color:${pass?'var(--ok)':'var(--bad)'}">${Q.right} / ${Q.qs.length}</div>
+      <h2 style="font-size:26px;margin:6px 0 10px">${pass?'挑戰成功！太厲害了！':'差一點點！'}</h2>
       <p class="hint">${pass?'這個主題完成了。':`答對 ${CONFIG.PASS} 題就過關，回去看看生詞再挑戰一次吧。`}</p>
-      <div class="btns"><button class="big" id="qAgain">再玩一次</button><button class="big fill" ${pass?`data-go="${cur.c}"`:'id="qBack"'}>${pass?'回到主題列表':'複習生詞'}</button></div></div>`;
+      ${pass?passBtns+`<div class="btns small2"><button class="big" id="qAgain">再玩一次</button><button class="big" data-go="${cur.c}">繼續學${nm}其他主題</button></div>`
+        :`<div class="btns"><button class="big" id="qAgain">再玩一次</button><button class="big fill" id="qBack">複習生詞</button></div>`}</div>`;
     $('#qAgain').onclick=()=>{cur.quiz=null;renderQuiz()};
-    const qb=$('#qBack');if(qb)qb.onclick=()=>{cur.tab='w';cur.quiz=null;renderPanel()};
+    const qb=$('#qBack');if(qb)qb.onclick=()=>{cur.tab='w';cur.gi=0;cur.quiz=null;renderPanel()};
     if(pass){document.querySelectorAll('[data-tab="q"]').forEach(b=>{if(!b.querySelector('.chk'))b.insertAdjacentHTML('beforeend','<span class="chk">✓</span>')});
-      if(!wasStamped&&stamped(cur.c))celebrate(cur.c);}
+      if(!wasStamped&&stamped(cur.c))celebrate(cur.c);else{sfx('win');confetti(140)}}
+    else sfx('try');
     pill();return;
   }
   const q=Q.qs[Q.i],showF=q.type==='f2z';
@@ -605,19 +698,21 @@ function renderQuiz(){
   Q.locked=false;
   P.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
     if(Q.locked)return;Q.locked=true;const o=q.opts[+b.dataset.k],ok=o===q.it;
-    if(ok){Q.right++;b.classList.add('right');$('#qFb').innerHTML='<span style="color:var(--ok)">答對了！</span>'}
-    else{b.classList.add('wrong');P.querySelectorAll('.opt')[q.opts.indexOf(q.it)].classList.add('right');$('#qFb').innerHTML=`<span style="color:var(--bad)">正確答案：${esc(q.it.f)}（${esc(q.it.z)}）</span>`}
+    if(ok){Q.right++;sfx('ok');b.classList.add('right');$('#qFb').innerHTML='<span style="color:var(--ok)">答對了！</span>'}
+    else{sfx('no');b.classList.add('wrong');P.querySelectorAll('.opt')[q.opts.indexOf(q.it)].classList.add('right');$('#qFb').innerHTML=`<span style="color:var(--bad)">正確答案：${esc(q.it.f)}（${esc(q.it.z)}）</span>`}
     speak(q.it.f,cur.c);
     setTimeout(()=>{Q.i++;renderQuiz()},ok?1100:2200);
   });
 }
+function nextCountry(c){const ids=LANGS.map(l=>l.id),i=ids.indexOf(c);for(let k=1;k<=ids.length;k++){const id=ids[(i+k)%ids.length];if(!stamped(id))return id}return null}
 function celebrate(c){
   const l=L(c),n=stampCount();
   $('#celeBody').innerHTML=`<div class="slot on" style="max-width:150px">${stampSVG(l,true)}</div><h2 style="font-size:26px">${l.country}章到手！</h2>
    <p class="hint">${n>=4?'四國章都集滿了，快去兌換小禮物！':`已集 ${n} / 4 章，繼續挑戰下一個國家吧。`}</p>
-   <button class="big fill" style="--c:var(--coral)" id="celeOk">${n>=4?'打開兌換券':'太好了'}</button>`;
-  $('#cele').hidden=false;
-  $('#celeOk').onclick=()=>{$('#cele').hidden=true;if(n>=4)location.hash='redeem'};
+   <div class="btns" style="flex-direction:column"><button class="big fill" style="--c:var(--coral);justify-content:center" id="celeOk">${n>=4?'打開兌換券':`前往下一站：${L(nextCountry(c)).name} ›`}</button><button class="big" style="--c:var(--soft);justify-content:center;border-color:var(--line)" id="celeStay">先留在這裡</button></div>`;
+  $('#cele').hidden=false;sfx('stamp');confetti(220);
+  $('#celeStay').onclick=()=>{$('#cele').hidden=true};
+  $('#celeOk').onclick=()=>{$('#cele').hidden=true;location.hash=n>=4?'redeem':nextCountry(c)+'-1-g'};
 }
 
 /* ===== redeem ===== */
@@ -642,13 +737,44 @@ function renderRedeem(){
   h.addEventListener('pointerdown',down);h.addEventListener('pointerup',up);h.addEventListener('pointerleave',up);h.addEventListener('pointercancel',up);
 }
 
+
+/* ===== 音效＋彩帶 ===== */
+let SND=true;try{SND=localStorage.getItem('sea4-snd')!=='0'}catch(e){}
+let AC=null;
+const actx=()=>{try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}catch(e){return null}};
+document.addEventListener('pointerdown',()=>{if(SND)actx()},{once:true});
+function tone(f,t0,dur,type,vol){const a=actx();if(!a)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'triangle';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0.0001,a.currentTime+t0);g.gain.exponentialRampToValueAtTime(vol||0.18,a.currentTime+t0+0.02);g.gain.exponentialRampToValueAtTime(0.0001,a.currentTime+t0+dur);o.connect(g).connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+dur+0.05)}
+function sfx(k){if(!SND)return;try{
+  if(k==='ok'){tone(880,0,.12);tone(1320,.09,.22)}
+  else if(k==='no'){tone(330,0,.18,'sine',.12);tone(247,.12,.25,'sine',.1)}
+  else if(k==='try'){tone(392,0,.2,'sine',.12);tone(440,.18,.3,'sine',.12)}
+  else if(k==='win'){[523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.32,'triangle',.2));[1319,1568,2093].forEach((f,i)=>tone(f,.5+i*.07,.25,'sine',.08))}
+  else if(k==='stamp'){tone(110,0,.18,'square',.12);[784,988,1175,1568].forEach((f,i)=>tone(f,.2+i*.1,.35,'triangle',.18));[2093,2637].forEach((f,i)=>tone(f,.7+i*.08,.3,'sine',.07))}
+}catch(e){}}
+function confetti(n){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const c=document.createElement('canvas');c.className='confetti';document.body.appendChild(c);
+  const x=c.getContext('2d'),dpr=Math.min(2,window.devicePixelRatio||1);let W,H;
+  const size=()=>{W=c.width=innerWidth*dpr;H=c.height=innerHeight*dpr};size();
+  const cols=['#ffc83d','#e8508a','#19c1e0','#2e9e5b','#2f62d0','#a8320f','#ffffff'];
+  const ps=Array.from({length:n},(_,i)=>({x:W*(i%2?0.15:0.85)+(Math.random()-.5)*W*.2,y:H*.75,vx:(i%2?1:-1)*(Math.random()*7+3)*dpr,vy:-(Math.random()*16+10)*dpr,r:Math.random()*Math.PI,vr:(Math.random()-.5)*.3,w:(Math.random()*8+6)*dpr,h:(Math.random()*5+4)*dpr,col:cols[i%cols.length],star:i%5===0}));
+  const t0=performance.now();
+  const step=t=>{x.clearRect(0,0,W,H);const age=t-t0;
+    for(const p of ps){p.vy+=.45*dpr;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.globalAlpha=Math.max(0,1-age/3200);x.fillStyle=p.col;
+      if(p.star){x.beginPath();for(let k=0;k<10;k++){const rr=k%2?p.w*.45:p.w;x.lineTo(Math.cos(k*Math.PI/5)*rr,Math.sin(k*Math.PI/5)*rr)}x.fill()}else x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore()}
+    if(age<3200)requestAnimationFrame(step);else c.remove()};
+  requestAnimationFrame(step);
+}
+function sndUI(){const b=$('#sndBtn');b.setAttribute('aria-pressed',SND);b.title=SND?'音效：開':'音效：關';b.innerHTML=SND?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>'}
+$('#sndBtn').onclick=()=>{SND=!SND;try{localStorage.setItem('sea4-snd',SND?'1':'0')}catch(e){}sndUI();if(SND)sfx('ok')};sndUI();
+
 /* ===== routing & events ===== */
 function route(){
   const h=location.hash.slice(1);
   stopLoop();
-  const m=h.match(/^(id|vi|th|ph)(?:-([1-4]))?$/);
+  const m=h.match(/^(id|vi|th|ph)(?:-([1-4])(-g)?)?$/);
   if(h==='redeem')renderRedeem();
-  else if(m&&m[2])renderTopic(m[1],+m[2]-1);
+  else if(m&&m[2])renderTopic(m[1],+m[2]-1,!!m[3]);
   else if(m)renderCountry(m[1]);
   else renderHome();
 }
@@ -657,13 +783,13 @@ document.addEventListener('click',e=>{
   const g=e.target.closest('[data-go]');
   if(g){const v=g.dataset.go;if(location.hash.slice(1)===v)route();else location.hash=v;return}
   const t=e.target.closest('[data-tab]');
-  if(t){stopLoop();cur.tab=t.dataset.tab;cur.si=0;if(cur.tab!=='q')cur.quiz=null;renderPanel();return}
+  if(t){stopLoop();cur.tab=t.dataset.tab;cur.si=0;cur.gi=0;if(cur.tab!=='q')cur.quiz=null;renderPanel();return}
   const r=e.target.closest('[data-rate]');
   if(r){rate=+r.dataset.rate;document.querySelectorAll('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.rate===rate));return}
   const s=e.target.closest('[data-say]');
   if(s){const T=L(cur.c).topics[cur.t],k=s.dataset.say;const it=k[0]==='w'?T.words[+k.slice(1)]:T.sents[+k.slice(1)];speak(it[0],cur.c,s)}
 });
-$('#go').onclick=()=>$('#countries').scrollIntoView({behavior:'smooth'});
+$('#go').onclick=()=>$('#howto').scrollIntoView({behavior:'smooth'});
 $('#logo').onclick=()=>{location.hash='';route()};
 $('#resetBtn').onclick=()=>ask('要清除這支手機上的所有闖關進度嗎？',()=>{S={done:{},shadow:{},finishedAt:null,redeemedAt:null,code:null};save();location.hash='';route();toast('進度已重設')});
 route();
